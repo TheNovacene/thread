@@ -14,10 +14,10 @@ This repository holds a working prototype and a proposal. It is not a live servi
 
 | View | What it does |
 | --- | --- |
-| **Why** | The case for it: a 49-second explainer (`media/`, self-hosted, no third-party player), three ordinary moments, the numbers, why the window is open now, the principles. |
+| **Why** | The case for it: a 49-second explainer (`media/`, self-hosted, no third-party player), four ordinary moments (the fourth is a young person in alternative provision), the numbers, why the window is open now, the principles. |
 | **Sam** | The holder's view. Who sees what, by role. The record with provenance on every line. Review dates that turn amber then red. The access log. A real, revocable QR code. |
 | **Scan** | The professional's view. Pick a role, sign in with the account you already use (NHS Care Identity, DfE Sign-in, a voucher), see only your slice. A break-glass emergency route that is logged and reported to the holder. |
-| **How it fits** | What already exists, what Thread adds, line by line. Where it lands in policy. **Keeping it safe**: the law it answers to (UNCRC, KCSIE 2026, Working Together, the Children's Wellbeing and Schools Act 2026, UK GDPR and the Data (Use and Access) Act 2025, the Children's Code, Caldicott, the Online Safety Act, the Equality Act, NHS clinical safety and assurance) and the ten gates before any pilot. What it is not. The hard parts. |
+| **How it fits** | What already exists, what Thread adds, line by line. Where it lands in policy, including alternative provision and children outside school. Why the safeguarding record (CPOMS, MyConcern) does not travel between settings, and what Thread adds without replacing it. **Keeping it safe**: the law it answers to (UNCRC, KCSIE 2026, Working Together, the Children's Wellbeing and Schools Act 2026, UK GDPR and the Data (Use and Access) Act 2025, the Children's Code, Caldicott, the Online Safety Act, the Equality Act, NHS clinical safety and assurance) and the ten gates before any pilot. What it is not. The hard parts. |
 | **The ask** | Who needs to say yes and to what. A twelve-month pilot path. The first three conversations. |
 | **Brand** (`/brand/`) | The brand pack: wordmark, symbol, colours, type, voice, downloadable files. |
 | **Make** (`/make/`) | A family's own sheet-maker. Fill in the record, choose who gets which lines, print a sheet per person. Nothing leaves the browser. |
@@ -57,7 +57,7 @@ Not a new health record. Not a replacement for the ISP, the EHC plan or the shar
 
 The same record as printable A4 PDFs, one sheet per role, with the review dates on paper. They are in [`paper/`](paper/) and served from the site. The cover sheet explains how to use them and carries the tracking table that stands in for the access log.
 
-- [All thirteen sheets in one PDF](https://onethread.uk/paper/onethread-paper-sheets-all.pdf) (22 pages)
+- [All fourteen sheets in one PDF](https://onethread.uk/paper/onethread-paper-sheets-all.pdf) (25 pages)
 - [How to use these sheets](https://onethread.uk/paper/onethread-sheet-00-how-to-use.pdf) (1 page)
 - [Paramedic](https://onethread.uk/paper/onethread-sheet-01-paramedic.pdf) (1 page)
 - [A&E doctor or nurse](https://onethread.uk/paper/onethread-sheet-02-aande-doctor-or-nurse.pdf) (2 pages)
@@ -67,10 +67,11 @@ The same record as printable A4 PDFs, one sheet per role, with the review dates 
 - [CAMHS clinician](https://onethread.uk/paper/onethread-sheet-06-camhs-clinician.pdf) (2 pages)
 - [School safeguarding lead](https://onethread.uk/paper/onethread-sheet-07-school-safeguarding-lead.pdf) (2 pages)
 - [SENCO or SEND caseworker](https://onethread.uk/paper/onethread-sheet-08-senco-or-send-caseworker.pdf) (2 pages)
-- [PE teacher or sports coach](https://onethread.uk/paper/onethread-sheet-09-pe-teacher-or-sports-coach.pdf) (1 page)
-- [Youth or family support worker](https://onethread.uk/paper/onethread-sheet-10-youth-or-family-support-worker.pdf) (2 pages)
-- [Named recovery coordinator](https://onethread.uk/paper/onethread-sheet-11-named-recovery-coordinator.pdf) (3 pages)
-- [What happened, told once](https://onethread.uk/paper/onethread-sheet-12-what-happened-told-once.pdf) (1 page)
+- [Alternative provision lead or tutor](https://onethread.uk/paper/onethread-sheet-09-alternative-provision-lead-or-tutor.pdf) (3 pages)
+- [PE teacher or sports coach](https://onethread.uk/paper/onethread-sheet-10-pe-teacher-or-sports-coach.pdf) (1 page)
+- [Youth or family support worker](https://onethread.uk/paper/onethread-sheet-11-youth-or-family-support-worker.pdf) (2 pages)
+- [Named recovery coordinator](https://onethread.uk/paper/onethread-sheet-12-named-recovery-coordinator.pdf) (3 pages)
+- [What happened, told once](https://onethread.uk/paper/onethread-sheet-13-what-happened-told-once.pdf) (1 page)
 
 **Make your own:** [onethread.uk/make](https://onethread.uk/make/) builds the same sheets with a family's own details. It runs entirely in the browser (`make/index.html`): no server, no account, no analytics, nothing stored; the family saves a small file to their own computer if they want to return to it, and prints each sheet to PDF themselves. It also works offline if the page is saved locally.
 
@@ -89,7 +90,7 @@ If you work at the PRSB, in NHS or DfE digital teams, at an integrated care boar
 ## Status
 
 - Prototype, November 2026. Single-page, no backend, invented data.
-- The paper version is published: thirteen A4 sheets, one per role, in `paper/`.
+- The paper version is published: fourteen A4 sheets, one per role, in `paper/`.
 - The names OneThread and Thread are in use; a UK trade mark application is being prepared.
 
 ## Sources
