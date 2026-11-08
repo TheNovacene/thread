@@ -14,7 +14,7 @@ This repository holds a working prototype and a proposal. It is not a live servi
 
 | View | What it does |
 | --- | --- |
-| **Why** | The case for it: three ordinary moments, the numbers, why the window is open now, the principles. |
+| **Why** | The case for it: a 49-second explainer (`media/`, self-hosted, no third-party player), three ordinary moments, the numbers, why the window is open now, the principles. |
 | **Sam** | The holder's view. Who sees what, by role. The record with provenance on every line. Review dates that turn amber then red. The access log. A real, revocable QR code. |
 | **Scan** | The professional's view. Pick a role, sign in with the account you already use (NHS Care Identity, DfE Sign-in, a voucher), see only your slice. A break-glass emergency route that is logged and reported to the holder. |
 | **How it fits** | What already exists, what Thread adds, line by line. Where it lands in policy. What it is not. The hard parts. |

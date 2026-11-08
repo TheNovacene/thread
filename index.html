@@ -198,6 +198,10 @@ td:first-child{font-weight:700;white-space:nowrap}
 .hero .big em{font-style:normal;color:var(--thread)}
 .hero .logo{height:56px}
 .scenes{display:grid;gap:12px}
+.watch{display:grid;gap:10px}
+figure.watch{margin:0}
+.watch video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;height:auto;border-radius:12px;background:#000;border:1px solid var(--line)}
+.watch figcaption{font-size:14px;color:var(--muted);max-width:62ch}
 .scene{display:grid;gap:6px;padding:14px 16px;border-left:3px solid var(--thread);background:var(--surface);border-radius:0 12px 12px 0}
 .scene p{max-width:60ch}
 .scene .who{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
@@ -251,6 +255,7 @@ const DONATE_URL='';
 const DONATE_PLATFORM='';
 const CONTACT='';
 const PAPER_BASE='https://onethread.uk/paper/';
+const MEDIA_BASE='https://onethread.uk/media/';
 const PAPER=[{f:"onethread-sheet-00-how-to-use.pdf",t:"How to use these sheets",p:1},{f:"onethread-sheet-01-paramedic.pdf",t:"Paramedic",p:1},{f:"onethread-sheet-02-aande-doctor-or-nurse.pdf",t:"A&E doctor or nurse",p:2},{f:"onethread-sheet-03-gp.pdf",t:"GP",p:2},{f:"onethread-sheet-04-pharmacist.pdf",t:"Pharmacist",p:1},{f:"onethread-sheet-05-physiotherapist.pdf",t:"Physiotherapist",p:2},{f:"onethread-sheet-06-camhs-clinician.pdf",t:"CAMHS clinician",p:2},{f:"onethread-sheet-07-school-safeguarding-lead.pdf",t:"School safeguarding lead",p:2},{f:"onethread-sheet-08-senco-or-send-caseworker.pdf",t:"SENCO or SEND caseworker",p:2},{f:"onethread-sheet-09-pe-teacher-or-sports-coach.pdf",t:"PE teacher or sports coach",p:1},{f:"onethread-sheet-10-youth-or-family-support-worker.pdf",t:"Youth or family support worker",p:2},{f:"onethread-sheet-11-named-recovery-coordinator.pdf",t:"Named recovery coordinator",p:3},{f:"onethread-sheet-12-what-happened-told-once.pdf",t:"What happened, told once",p:1}];
 
 const ROLES=[
@@ -658,6 +663,13 @@ function renderHome(){
   '<p class="big">Every new adult asks the same questions. <em>One</em>Thread is the record a young person holds, so they only have to tell it once.</p>'+
   '<p class="lead">When a child is hurt, or needs support, the people who help them arrive one at a time: a paramedic, a doctor, a physio, a teacher, a counsellor, a support worker. Each one needs to know something. Each one asks. The child, or the parent, becomes the only place the whole story lives, and tells it again and again, often at the worst moments to tell it.</p>'+
   '<p class="lead">OneThread, Thread for short, turns that round. The young person holds one record. Each professional scans a code and sees only the part they need. Every look is recorded. The hard part, what happened, is written once and shared only with the people the young person chooses.</p>'+
+ '</section>'+
+ '<section class="sec watch"><h2 class="rule">Forty-nine seconds</h2>'+
+  '<figure class="watch"><video controls preload="metadata" playsinline poster="'+MEDIA_BASE+'onethread-explainer-poster.jpg" aria-label="OneThread explainer video, 49 seconds">'+
+   '<source src="'+MEDIA_BASE+'onethread-explainer.mp4" type="video/mp4" onerror="var f=this.closest(\'figure\');f.innerHTML=\'<p class=lead><a class=&quot;btn thread&quot; href=&quot;https://onethread.uk/&quot; target=_blank rel=noopener>Watch it at onethread.uk</a></p>\'">'+
+   'Your browser cannot play this video. <a href="'+MEDIA_BASE+'onethread-explainer.mp4">Download it instead</a> (12 MB).'+
+  '</video>'+
+  '<figcaption>The idea in under a minute. Nothing plays until you press play, and nothing about you is recorded when you do.</figcaption></figure>'+
  '</section>'+
  '<section class="sec"><h2 class="rule">Three ordinary moments</h2><div class="scenes">'+
   '<div class="scene"><span class="who">A paramedic, Saturday evening</span><p>A sixteen-year-old is unconscious. The phone is locked. The allergy is in a parent’s memory, and the parent is twenty minutes away. The crew works without it.</p></div>'+
