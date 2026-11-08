@@ -17,7 +17,7 @@ This repository holds a working prototype and a proposal. It is not a live servi
 | **Why** | The case for it: a 49-second explainer (`media/`, self-hosted, no third-party player), three ordinary moments, the numbers, why the window is open now, the principles. |
 | **Sam** | The holder's view. Who sees what, by role. The record with provenance on every line. Review dates that turn amber then red. The access log. A real, revocable QR code. |
 | **Scan** | The professional's view. Pick a role, sign in with the account you already use (NHS Care Identity, DfE Sign-in, a voucher), see only your slice. A break-glass emergency route that is logged and reported to the holder. |
-| **How it fits** | What already exists, what Thread adds, line by line. Where it lands in policy. What it is not. The hard parts. |
+| **How it fits** | What already exists, what Thread adds, line by line. Where it lands in policy. **Keeping it safe**: the law it answers to (UNCRC, KCSIE 2026, Working Together, the Children's Wellbeing and Schools Act 2026, UK GDPR and the Data (Use and Access) Act 2025, the Children's Code, Caldicott, the Online Safety Act, the Equality Act, NHS clinical safety and assurance) and the ten gates before any pilot. What it is not. The hard parts. |
 | **The ask** | Who needs to say yes and to what. A twelve-month pilot path. The first three conversations. |
 | **Brand** (`/brand/`) | The brand pack: wordmark, symbol, colours, type, voice, downloadable files. |
 | **Make** (`/make/`) | A family's own sheet-maker. Fill in the record, choose who gets which lines, print a sheet per person. Nothing leaves the browser. |
@@ -99,6 +99,11 @@ If you work at the PRSB, in NHS or DfE digital teams, at an integrated care boar
 - Department for Education, *Every Child Achieving and Thriving*, SEND white paper, 23 February 2026
 - Department of Health and Social Care, *Fit for the Future: 10 Year Health Plan for England*, 3 July 2025
 - NHS England, [National Record Locator](https://digital.nhs.uk/services/national-record-locator)
+- Department for Education, *Keeping Children Safe in Education 2026* (in force 1 September 2026)
+- [Children's Wellbeing and Schools Act 2026, s.4](https://www.legislation.gov.uk/ukpga/2026/21/section/4) (information sharing and consistent identifiers)
+- Information Commissioner's Office, *Age Appropriate Design Code*
+- Stevens, K., & The Novacene Ltd. (2026). *GRC Engineering for the Relational Layer: A Verified Control Set and Evidence Engine for Child-Facing AI.* Zenodo. https://doi.org/10.5281/zenodo.21481520
+- Stevens, K., & The Novacene Ltd. (2026). *Bounded Inference at the Edge: A Compliance Architecture for Distributed AI Inference under the EU AI Act, the UK Online Safety Act 2023, and the NIST AI Risk Management Framework.* Zenodo. https://doi.org/10.5281/zenodo.21481256
 
 ## Who holds it
 
