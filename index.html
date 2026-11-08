@@ -205,6 +205,12 @@ td:first-child{font-weight:700;white-space:nowrap}
 .donate{border-left:4px solid var(--thread)}
 .btn.thread{background:var(--thread);border-color:var(--thread);color:#fff}
 .btn.thread[aria-disabled="true"]{opacity:.55;cursor:default}
+.paper{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.paper a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);text-decoration:none;min-width:0}
+.paper a:hover{border-color:var(--thread)}
+.paper a span{min-width:0}
+.paper a small{color:var(--muted);white-space:nowrap;font-family:var(--mono);font-size:12px}
+.paper a.all{grid-column:1/-1;border-color:var(--thread);font-weight:700}
 @media (prefers-reduced-motion:reduce){.sw::after{transition:none}}
 </style>
 </head>
@@ -232,6 +238,8 @@ const STORE='thread-demo-v2';
 const DONATE_URL='';
 const DONATE_PLATFORM='';
 const CONTACT='';
+const PAPER_BASE='https://onethread.uk/paper/';
+const PAPER=[{f:"onethread-sheet-00-how-to-use.pdf",t:"How to use these sheets",p:1},{f:"onethread-sheet-01-paramedic.pdf",t:"Paramedic",p:1},{f:"onethread-sheet-02-aande-doctor-or-nurse.pdf",t:"A&E doctor or nurse",p:2},{f:"onethread-sheet-03-gp.pdf",t:"GP",p:2},{f:"onethread-sheet-04-pharmacist.pdf",t:"Pharmacist",p:1},{f:"onethread-sheet-05-physiotherapist.pdf",t:"Physiotherapist",p:2},{f:"onethread-sheet-06-camhs-clinician.pdf",t:"CAMHS clinician",p:2},{f:"onethread-sheet-07-school-safeguarding-lead.pdf",t:"School safeguarding lead",p:2},{f:"onethread-sheet-08-senco-or-send-caseworker.pdf",t:"SENCO or SEND caseworker",p:2},{f:"onethread-sheet-09-pe-teacher-or-sports-coach.pdf",t:"PE teacher or sports coach",p:1},{f:"onethread-sheet-10-youth-or-family-support-worker.pdf",t:"Youth or family support worker",p:2},{f:"onethread-sheet-11-named-recovery-coordinator.pdf",t:"Named recovery coordinator",p:3},{f:"onethread-sheet-12-what-happened-told-once.pdf",t:"What happened, told once",p:1}];
 
 const ROLES=[
  {id:'paramedic',name:'Paramedic',body:'HCPC register',signin:'NHS Care Identity (CIS2)',emergency:true},
@@ -447,7 +455,7 @@ function renderOwner(){
   recordSection()+
   situationsSection(null)+
   logSection()+
-  '<p class="foot"><button class="btn ghost" id="reset">Reset the demo</button><span>Sam is invented, and so is everything in this record. Nobody real is described.</span></p>';
+  '<p class="foot"><button class="btn ghost" id="reset">Reset the demo</button><span>Sam is invented, and so is everything in this record. Nobody real is described. <a href="#home">Printable sheets</a> of this record are on the Why page.</span></p>';
 }
 function drawQR(){
  const el=document.getElementById('qr');if(!el)return;el.innerHTML='';
@@ -615,6 +623,18 @@ function renderAsk(){
   '<li>If Sam is unconscious and the phone is locked, is the National Record Locator route enough, or does a card in the wallet still matter?</li></ul></section>';
 }
 
+/* ---------- Paper sheets ---------- */
+function paperSection(){
+ return '<section class="sec"><h2 class="rule">Use it on paper today</h2>'+
+  '<p class="lead">The same record as printable A4 sheets, one per role, with the review dates on paper. A family can use these before any software exists: hand each person only their sheet, log it on the cover sheet, and keep the account of what happened for the people the young person names. They hold the example record for Sam; replace it with the real one before any sheet is given out.</p>'+
+  '<div class="paper">'+
+   '<a class="all" href="'+PAPER_BASE+'onethread-paper-sheets-all.pdf" target="_blank" rel="noopener"><span>All thirteen sheets in one PDF</span><small>22 pages</small></a>'+
+   PAPER.map(x=>'<a href="'+PAPER_BASE+esc(x.f)+'" target="_blank" rel="noopener"><span>'+esc(x.t)+'</span><small>'+x.p+(x.p>1?' pp':' p')+'</small></a>').join('')+
+  '</div>'+
+  '<p class="small muted">PDF, A4, free to print and share under CC BY-SA 4.0. The sheets are generated from the same data as this site, so the two never drift apart.</p>'+
+ '</section>';
+}
+
 /* ---------- Home: why ---------- */
 function renderHome(){
  const logo='<svg class="logo" viewBox="0 0 214 40" role="img" aria-label="OneThread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" letter-spacing="-0.5"><tspan font-weight="500" fill="var(--thread)">One</tspan><tspan font-weight="700" fill="currentColor">Thread</tspan></text><path d="M-4 30 C 22 24, 46 36, 72 30 S 122 24, 152 30 S 178 36, 188 31 c 4 -4, 2 -9, -3 -8 c -5 1, -4 7, 1 8 c 6 1, 15 -1, 24 -5" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -662,6 +682,7 @@ function renderHome(){
    '<a href="#fit"><b>How it fits</b><small>What exists, what Thread adds, line by line</small></a>'+
    '<a href="#ask"><b>The ask</b><small>Who needs to say yes, and the first year</small></a>'+
   '</div></section>'+
+ paperSection()+
  '<section class="card donate"><p class="eyebrow">Help it happen</p>'+
   '<h2>The first money buys the unglamorous things</h2>'+
   '<p>A trademark search and filing. A data protection impact assessment by a specialist, before any real record exists. Paying a panel of ten young people to design the defaults for every role, because nothing about them should be decided without them. Paper sheets in ten families’ hands by the new year. None of it is expensive. All of it has to come before anyone in the NHS or a council can say yes.</p>'+

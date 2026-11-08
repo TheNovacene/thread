@@ -51,6 +51,27 @@ Thread adds three things that do not exist: consent by role that the person cont
 
 Not a new health record. Not a replacement for the ISP, the EHC plan or the shared care record. Not a messaging app. Not a decision-maker: it displays, it does not advise, score or predict.
 
+## Paper sheets
+
+The same record as printable A4 PDFs, one sheet per role, with the review dates on paper. They are in [`paper/`](paper/) and served from the site. The cover sheet explains how to use them and carries the tracking table that stands in for the access log.
+
+- [All thirteen sheets in one PDF](https://onethread.uk/paper/onethread-paper-sheets-all.pdf) (22 pages)
+- [How to use these sheets](https://onethread.uk/paper/onethread-sheet-00-how-to-use.pdf) (1 page)
+- [Paramedic](https://onethread.uk/paper/onethread-sheet-01-paramedic.pdf) (1 page)
+- [A&E doctor or nurse](https://onethread.uk/paper/onethread-sheet-02-aande-doctor-or-nurse.pdf) (2 pages)
+- [GP](https://onethread.uk/paper/onethread-sheet-03-gp.pdf) (2 pages)
+- [Pharmacist](https://onethread.uk/paper/onethread-sheet-04-pharmacist.pdf) (1 page)
+- [Physiotherapist](https://onethread.uk/paper/onethread-sheet-05-physiotherapist.pdf) (2 pages)
+- [CAMHS clinician](https://onethread.uk/paper/onethread-sheet-06-camhs-clinician.pdf) (2 pages)
+- [School safeguarding lead](https://onethread.uk/paper/onethread-sheet-07-school-safeguarding-lead.pdf) (2 pages)
+- [SENCO or SEND caseworker](https://onethread.uk/paper/onethread-sheet-08-senco-or-send-caseworker.pdf) (2 pages)
+- [PE teacher or sports coach](https://onethread.uk/paper/onethread-sheet-09-pe-teacher-or-sports-coach.pdf) (1 page)
+- [Youth or family support worker](https://onethread.uk/paper/onethread-sheet-10-youth-or-family-support-worker.pdf) (2 pages)
+- [Named recovery coordinator](https://onethread.uk/paper/onethread-sheet-11-named-recovery-coordinator.pdf) (3 pages)
+- [What happened, told once](https://onethread.uk/paper/onethread-sheet-12-what-happened-told-once.pdf) (1 page)
+
+They are generated from the site's own data by `tools/build-sheets.js` (Node and Playwright), so paper and screen cannot drift apart. Regenerate with `node tools/build-sheets.js index.html paper`.
+
 ## Running it
 
 It is a single file. Open `index.html` in a browser, or serve the folder with anything static. The QR library and the fonts load from public CDNs; without a network the page still works and shows the code's address as text instead of a QR image. The demo keeps its state (permissions, access log, issued code) in the browser's local storage; **Reset the demo** at the foot of Sam's view clears it.
@@ -64,7 +85,7 @@ If you work at the PRSB, in NHS or DfE digital teams, at an integrated care boar
 ## Status
 
 - Prototype, November 2026. Single-page, no backend, invented data.
-- A paper version exists: one sheet per role, with review dates, for families who want to use the idea before any software does.
+- The paper version is published: thirteen A4 sheets, one per role, in `paper/`.
 - The names OneThread and Thread are in use; a UK trade mark application is being prepared.
 
 ## Sources
