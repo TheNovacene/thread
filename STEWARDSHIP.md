@@ -1,8 +1,8 @@
 # Stewardship
 
-Thread is intended to become public infrastructure: a record every young person can hold, run by a body that cannot sell it and cannot profit from the data in it.
+OneThread (Thread, for short) is intended to become public infrastructure: a record every young person can hold, run by a body that cannot sell it and cannot profit from the data in it.
 
-That body does not exist yet. Until it does, **The Novacene Ltd** (company number to be added; a UK company directed by Kirstin Stevens) holds the Thread name, mark, code and written content **in stewardship for a public-benefit body to be formed**, expected to be a community interest company or a registered charity with an asset lock.
+That body does not exist yet. Until it does, **The Novacene Ltd** (company number 14324471, a UK company directed by Kirstin Stevens) holds the Thread name, mark, code and written content **in stewardship for a public-benefit body to be formed**, expected to be a community interest company or a registered charity with an asset lock.
 
 The Novacene Ltd has resolved that it:
 
@@ -14,7 +14,7 @@ The Novacene Ltd has resolved that it:
 
 Contributions to this repository are accepted on the understanding that they are licensed under the same terms as the project, and that the contributor agrees to the assignment described in point 1.
 
-This file states intent and is published so that the people Thread asks to trust it can see who holds it and why. The formal instrument is a resolution of the directors of The Novacene Ltd, kept with the company's records, and the assignment itself will be a written deed when the public-benefit body exists.
+This file states intent and is published so that the people Thread asks to trust it can see who holds it and why. The formal instrument is a written resolution of the director of The Novacene Ltd dated 8 November 2026, kept with the company's records. If no public-benefit body has been formed within twenty-four months, the resolution provides for the assets to pass instead to the Autistic Girls Network (registered charity 1196655), subject to its agreement, or to another body with a statutory asset lock whose objects include the welfare of children and young people. The assignment itself will be a written deed when the public-benefit body exists.
 
 If you are a professional body, a public authority or a funder and need the resolution or a formal undertaking, ask.
 
