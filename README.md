@@ -75,6 +75,14 @@ If you work at the PRSB, in NHS or DfE digital teams, at an integrated care boar
 - Department of Health and Social Care, *Fit for the Future: 10 Year Health Plan for England*, 3 July 2025
 - NHS England, [National Record Locator](https://digital.nhs.uk/services/national-record-locator)
 
+## Who holds it
+
+Thread is held in stewardship by The Novacene Ltd for a public-benefit body to be formed, which will receive the name, mark, code and content for nominal consideration when it exists. The Novacene will grant no exclusive licence and will not sell any of it in the meantime. The full statement is in [`STEWARDSHIP.md`](STEWARDSHIP.md).
+
 ## Licence
 
-Code is released under the MIT licence (see `LICENSE`). The written content of the page and this README is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "Thread" and the thread mark are not covered by either licence.
+Copyright © 2026 The Novacene Ltd, held in stewardship as described above.
+
+- **Code** (`index.html` and anything else that runs) is licensed under the [GNU Affero General Public License v3.0](LICENSE). You may use, study, change and share it, including for public services. If you offer a modified version to others over a network, you must offer them the source of your modified version under the same licence.
+- **Written content** (the words on the page, this README and the other documents here) is licensed under [Creative Commons Attribution-ShareAlike 4.0](LICENSE-CONTENT). Credit Thread, link back, and share what you build on it under the same terms.
+- **The name "Thread" and the thread mark** are not covered by either licence. Do not use them for a product or service that is not this one.
