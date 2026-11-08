@@ -1,12 +1,12 @@
-# Thread
+# OneThread
 
-**Tell it once.** A care record held by the young person it is about.
+**Tell it once.** A care record held by the young person it is about. Thread, for short.
 
 When a child is hurt, or needs support, the adults who help arrive one at a time: a paramedic, a doctor, a physiotherapist, a teacher, a counsellor, a support worker. Each needs to know something. Each asks. The child, or the parent, becomes the only place the whole story lives.
 
 Thread turns that round. The young person holds one record. Each professional scans a code and sees only the part they need. Every look is recorded. The hardest part, what happened, is written once and shared only with the people the young person chooses.
 
-**Live demo:** https://thenovacene.github.io/thread/
+**Live demo:** https://onethread.uk (also at https://thenovacene.github.io/thread/)
 
 This repository holds a working prototype and a proposal. It is not a live service. Everything in the example record is invented: the young person, the injury, the clinicians, the school. No real person's information is held anywhere in it.
 
@@ -65,7 +65,7 @@ If you work at the PRSB, in NHS or DfE digital teams, at an integrated care boar
 
 - Prototype, November 2026. Single-page, no backend, invented data.
 - A paper version exists: one sheet per role, with review dates, for families who want to use the idea before any software does.
-- The name Thread is in use pending a trademark search.
+- The names OneThread and Thread are in use; a UK trade mark application is being prepared.
 
 ## Sources
 
@@ -85,4 +85,4 @@ Copyright © 2026 The Novacene Ltd, held in stewardship as described above.
 
 - **Code** (`index.html` and anything else that runs) is licensed under the [GNU Affero General Public License v3.0](LICENSE). You may use, study, change and share it, including for public services. If you offer a modified version to others over a network, you must offer them the source of your modified version under the same licence.
 - **Written content** (the words on the page, this README and the other documents here) is licensed under [Creative Commons Attribution-ShareAlike 4.0](LICENSE-CONTENT). Credit Thread, link back, and share what you build on it under the same terms.
-- **The name "Thread" and the thread mark** are not covered by either licence. Do not use them for a product or service that is not this one.
+- **The names "OneThread" and "Thread" and the thread mark** are not covered by either licence. Do not use them for a product or service that is not this one.

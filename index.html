@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Thread: a care record held by the young person it is about. Tell it once. A working prototype built on the PRSB About Me standard, the GP record, digital Individual Support Plans and existing NHS and DfE sign-ins.">
-<meta property="og:title" content="Thread">
+<meta property="og:title" content="OneThread">
 <meta property="og:description" content="A care record held by the young person it is about. Tell it once.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231B2430'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff'%3ET%3C/text%3E%3Cpath d='M3 17 C 10 12, 16 22, 22 17 S 28 13, 31 16' fill='none' stroke='%23B9121B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -14,9 +14,9 @@
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<title>Thread</title>
+<title>OneThread</title>
 <!--
-  Thread. Copyright (C) 2026 The Novacene Ltd, held in stewardship for a public-benefit body to be formed.
+  OneThread (Thread). Copyright (C) 2026 The Novacene Ltd, held in stewardship for a public-benefit body to be formed.
   SPDX-License-Identifier: AGPL-3.0-only (code). Written content: CC-BY-SA-4.0.
   Source: https://github.com/TheNovacene/thread
 -->
@@ -211,7 +211,7 @@ td:first-child{font-weight:700;white-space:nowrap}
 <body>
 <header class="top"><div class="in">
   <div class="brand">
-    <svg class="logo" viewBox="0 0 156 40" role="img" aria-label="Thread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" font-weight="700" fill="currentColor">Thread</text><path d="M-4 21 C 18 13, 36 29, 58 21 S 96 13, 114 21 c 8 3, 15 -1, 13 -6 c -2 -5, -10 -3, -7 2 c 3 5, 15 5, 28 1" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="logo" viewBox="0 0 214 40" role="img" aria-label="OneThread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" letter-spacing="-0.5"><tspan font-weight="500" fill="var(--thread)">One</tspan><tspan font-weight="700" fill="currentColor">Thread</tspan></text><path d="M-4 30 C 22 24, 46 36, 72 30 S 122 24, 152 30 S 178 36, 188 31 c 4 -4, 2 -9, -3 -8 c -5 1, -4 7, 1 8 c 6 1, 15 -1, 24 -5" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <small>Tell it once.<br>A record held by the person it is about.</small>
   </div>
   <nav class="seg" id="nav">
@@ -468,7 +468,7 @@ function renderScan(){
   return '<section class="card access">'+
    '<p class="eyebrow">'+(scan.byCode?'You scanned Sam’s code':'Simulated scan of Sam’s code')+'</p>'+
    '<h1>Who are you?</h1>'+
-   (state.paused?'<p class="lead"><b>Sam has paused this record.</b> Only emergency access is open, and it is reported to Sam.</p>':'<p class="lead">Sam Reid, 16, holds a Thread. You will see the part of it Sam has allowed for your role. Sam will see that you looked.</p>')+
+   (state.paused?'<p class="lead"><b>Sam has paused this record.</b> Only emergency access is open, and it is reported to Sam.</p>':'<p class="lead">Sam Reid, 16, holds a OneThread record. You will see the part of it Sam has allowed for your role. Sam will see that you looked.</p>')+
    '<div class="rolegrid">'+list.map(r=>'<button class="rolebtn" data-pick="'+r.id+'"><b>'+esc(r.name)+'</b><small>'+esc(r.signin)+'</small></button>').join('')+'</div>'+
   '</section>';
  }
@@ -617,14 +617,14 @@ function renderAsk(){
 
 /* ---------- Home: why ---------- */
 function renderHome(){
- const logo='<svg class="logo" viewBox="0 0 156 40" role="img" aria-label="Thread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" font-weight="700" fill="currentColor">Thread</text><path d="M-4 21 C 18 13, 36 29, 58 21 S 96 13, 114 21 c 8 3, 15 -1, 13 -6 c -2 -5, -10 -3, -7 2 c 3 5, 15 5, 28 1" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ const logo='<svg class="logo" viewBox="0 0 214 40" role="img" aria-label="OneThread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" letter-spacing="-0.5"><tspan font-weight="500" fill="var(--thread)">One</tspan><tspan font-weight="700" fill="currentColor">Thread</tspan></text><path d="M-4 30 C 22 24, 46 36, 72 30 S 122 24, 152 30 S 178 36, 188 31 c 4 -4, 2 -9, -3 -8 c -5 1, -4 7, 1 8 c 6 1, 15 -1, 24 -5" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  const donate=DONATE_URL
   ?'<a class="btn thread" href="'+esc(DONATE_URL)+'" target="_blank" rel="noopener">Donate'+(DONATE_PLATFORM?' on '+esc(DONATE_PLATFORM):'')+'</a>'
   :'<span class="btn thread" aria-disabled="true">Donations open soon</span>';
  return '<section class="hero">'+logo+
-  '<p class="big">Every new adult asks the same questions. <em>Thread</em> is the record a young person holds, so they only have to tell it once.</p>'+
+  '<p class="big">Every new adult asks the same questions. <em>One</em>Thread is the record a young person holds, so they only have to tell it once.</p>'+
   '<p class="lead">When a child is hurt, or needs support, the people who help them arrive one at a time: a paramedic, a doctor, a physio, a teacher, a counsellor, a support worker. Each one needs to know something. Each one asks. The child, or the parent, becomes the only place the whole story lives, and tells it again and again, often at the worst moments to tell it.</p>'+
-  '<p class="lead">Thread turns that round. The young person holds one record. Each professional scans a code and sees only the part they need. Every look is recorded. The hard part, what happened, is written once and shared only with the people the young person chooses.</p>'+
+  '<p class="lead">OneThread, Thread for short, turns that round. The young person holds one record. Each professional scans a code and sees only the part they need. Every look is recorded. The hard part, what happened, is written once and shared only with the people the young person chooses.</p>'+
  '</section>'+
  '<section class="sec"><h2 class="rule">Three ordinary moments</h2><div class="scenes">'+
   '<div class="scene"><span class="who">A paramedic, Saturday evening</span><p>A sixteen-year-old is unconscious. The phone is locked. The allergy is in a parent’s memory, and the parent is twenty minutes away. The crew works without it.</p></div>'+
