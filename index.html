@@ -14,14 +14,22 @@
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
+<style>
+@font-face{font-family:'Atkinson Hyperlegible';src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(fonts/atkinson-hyperlegible-latin-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+</style>
 <title>OneThread</title>
 <!--
   OneThread (Thread). Copyright (C) 2026 The Novacene Ltd, held in stewardship for a public-benefit body to be formed.
   SPDX-License-Identifier: AGPL-3.0-only (code). Written content: CC-BY-SA-4.0.
   Source: https://github.com/TheNovacene/thread
 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="vendor/qrcode.min.js"></script>
 <style>
 :root{
   /* Layout: phone-first single column (max 760px); sticky top bar carries four views; the red thread is the one brand flourish, used in the wordmark and as a short rule under each section heading */
@@ -182,6 +190,9 @@ td:first-child{font-weight:700;white-space:nowrap}
 .stk div{min-width:0;font-size:15px}
 .stk .k{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;font-weight:700}
 .red{color:var(--thread)}
+.sitefoot{border-top:1px solid var(--line);background:var(--surface)}
+.sitefoot .in{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+.sitefoot a{color:var(--muted)}
 .hero{display:grid;gap:14px;padding-block:8px 4px}
 .hero .big{font-family:var(--display);font-weight:700;font-size:clamp(34px,8vw,56px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
 .hero .big em{font-style:normal;color:var(--thread)}
@@ -229,6 +240,7 @@ td:first-child{font-weight:700;white-space:nowrap}
   </nav>
 </div></header>
 <main id="main"></main>
+<footer class="sitefoot"><div class="in"><span>OneThread. Tell it once.</span><a href="https://onethread.uk/privacy/" target="_blank" rel="noopener">Privacy and cookies</a><a href="https://github.com/TheNovacene/thread" target="_blank" rel="noopener">Source</a><a href="https://github.com/TheNovacene/thread/blob/main/STEWARDSHIP.md" target="_blank" rel="noopener">Stewardship</a></div></footer>
 
 <script>
 (function(){
@@ -353,8 +365,8 @@ function situationState(s){
 }
 
 function fresh(){return {perms:JSON.parse(JSON.stringify(DEFAULT_PERMS)),log:SEED_LOG.map(e=>Object.assign({},e)),token:'7k2m-qd4a',paused:false,reviewed:false,permRole:'paramedic',showCode:false};}
-function load(){try{const r=localStorage.getItem(STORE);if(!r)return null;const s=JSON.parse(r);if(!s||!s.perms||!s.log)return null;return s;}catch(e){return null;}}
-function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+function load(){try{const r=sessionStorage.getItem(STORE);if(!r)return null;const s=JSON.parse(r);if(!s||!s.perms||!s.log)return null;return s;}catch(e){return null;}}
+function save(){try{sessionStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
 let state=load()||fresh();
 let scan={step:1,role:null,verified:'',until:0,preview:false,bg:false,stale:false,byCode:false,checking:false};
 

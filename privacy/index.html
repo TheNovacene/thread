@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Privacy and cookies for onethread.uk. No cookies, no analytics, nothing stored. What the hosting provider sees, and how the sheet-maker keeps your information on your own computer.">
+<title>Privacy and cookies</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231B2430'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff'%3ET%3C/text%3E%3Cpath d='M3 17 C 10 12, 16 22, 22 17 S 28 13, 31 16' fill='none' stroke='%23B9121B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-400-normal.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-700-normal.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(../fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(../fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+:root{--bg:#F5F4F0;--surface:#FFFFFF;--fg:#1B2430;--muted:#5C6672;--line:#D9DAD5;--soft:#EBEBE6;--accent:#1F4E8C;--thread:#B9121B;--ok-soft:#DCF0E3;--ok:#2A7A4A;
+ --display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;--body:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme: dark){:root{--bg:#11161C;--surface:#1A2129;--fg:#E8EBEE;--muted:#9AA6B3;--line:#2E3842;--soft:#222B35;--accent:#8CB8F0;--thread:#F0656C;--ok-soft:#173224;--ok:#80CC9C}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(28px,6vw,38px);font-weight:700}
+h2{font-size:21px;font-weight:700;margin-top:8px}
+h2.rule::after{content:"";display:block;width:44px;height:2px;background:var(--thread);margin-top:8px;border-radius:2px}
+h3{font-size:16px;font-weight:700}
+p,ul{margin:0;max-width:66ch}
+ul{padding-left:20px;display:grid;gap:6px}
+a{color:var(--accent)}
+.top{position:sticky;top:0;z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .in{max-width:760px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:10px}
+.logo{height:34px;width:auto;display:block;color:var(--fg)}
+.top small{display:block;font-size:12px;color:var(--muted);line-height:1.2}
+main{max-width:760px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px));display:grid;gap:26px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.sec{display:grid;gap:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px}
+.card.yes{border-left:4px solid var(--thread)}
+.small{font-size:14px;color:var(--muted)}
+.table{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px 9px 0;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+td:first-child{font-weight:700;white-space:nowrap}
+.ok{display:inline-block;background:var(--ok-soft);color:var(--ok);font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+footer .in{max-width:760px;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a href="../" aria-label="OneThread home" style="display:block;color:inherit"><svg class="logo" viewBox="0 0 214 40" role="img" aria-label="OneThread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" letter-spacing="-0.5"><tspan font-weight="500" fill="var(--thread)">One</tspan><tspan font-weight="700" fill="currentColor">Thread</tspan></text><path d="M-4 30 C 22 24, 46 36, 72 30 S 122 24, 152 30 S 178 36, 188 31 c 4 -4, 2 -9, -3 -8 c -5 1, -4 7, 1 8 c 6 1, 15 -1, 24 -5" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <small>Tell it once.<br>Privacy and cookies</small>
+</div></header>
+
+<main>
+<section class="sec">
+  <p class="eyebrow">Privacy and cookies</p>
+  <h1>This site sets no cookies and keeps nothing about you.</h1>
+  <p>That is unusual enough to be worth explaining properly, so this page says exactly what happens when you visit onethread.uk, use the demonstration, download the paper sheets or make your own. It is written in plain English on purpose. It was last updated on <b>8 November 2026</b>.</p>
+</section>
+
+<section class="card yes">
+  <p class="eyebrow">The short version</p>
+  <ul>
+    <li><b>No cookies.</b> None, of any kind. There is no cookie banner because there is nothing to ask you about.</li>
+    <li><b>No analytics or tracking.</b> We do not count visitors, measure clicks or use any advertising or analytics service.</li>
+    <li><b>No accounts, no forms, no databases.</b> There is nothing to sign up to and nowhere for information to go.</li>
+    <li><b>No third-party scripts or fonts.</b> Everything the pages need is served from onethread.uk itself, so no other company sees that you were here.</li>
+    <li><b>The sheet-maker keeps everything on your computer.</b> What you type never leaves your browser. The only copy that exists is the file you choose to save.</li>
+  </ul>
+</section>
+
+<section class="sec">
+  <h2 class="rule">Who is responsible</h2>
+  <p>onethread.uk is published by <b>The Novacene Ltd</b>, a company registered in England and Wales (company number 14324471), which holds OneThread in stewardship for a public-benefit body being set up, as described in the <a href="https://github.com/TheNovacene/thread/blob/main/STEWARDSHIP.md">stewardship statement</a>. For anything about privacy on this site, contact <b>[contact address to be added]</b>. Because the site collects nothing, The Novacene Ltd holds no personal information about visitors and has none to give you, correct or delete; the section on hosting below explains the one place where visitor information exists at all.</p>
+</section>
+
+<section class="sec">
+  <h2 class="rule">What happens when you visit</h2>
+  <div class="table"><table>
+    <thead><tr><th>Part of the site</th><th>What it does with information</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Any page</td><td>Sends you the page. Nothing is recorded by us. See "Hosting" for what the hosting provider's servers keep.</td><td><span class="ok">nothing stored</span></td></tr>
+      <tr><td>The demonstration (Sam, Scan)</td><td>Keeps your choices within the demo, such as which lines you switched on and the invented access log, in your browser's <i>session storage</i> so that the views work as you move between them. It holds only the invented example record and your clicks. It is never sent anywhere and your browser deletes it when you close the tab. "Reset the demo" clears it sooner.</td><td><span class="ok">session only, invented data</span></td></tr>
+      <tr><td>Paper sheets (PDF downloads)</td><td>Sends you a file. Nothing is recorded by us.</td><td><span class="ok">nothing stored</span></td></tr>
+      <tr><td>Make your own sheets</td><td>Runs entirely inside your browser. What you type stays in the page's memory until you close it. It is not sent to us or to anyone; there is no server to send it to. If you press "Save to a file", your browser writes a file to your own computer, and that file is yours. If you save the page itself, it works with the internet switched off.</td><td><span class="ok">your computer only</span></td></tr>
+      <tr><td>Links to other sites</td><td>GitHub, gov.uk, the Charity Commission and others have their own privacy policies, which apply once you are there.</td><td></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec">
+  <h2 class="rule">Cookies and similar storage, in full</h2>
+  <p>UK law (the Privacy and Electronic Communications Regulations) covers cookies and anything else a website stores on your device, and requires consent unless the storage is strictly necessary to provide the service you asked for. This site uses:</p>
+  <ul>
+    <li><b>Cookies:</b> none.</li>
+    <li><b>Local storage:</b> none.</li>
+    <li><b>Session storage:</b> one entry, used only by the demonstration, only while its tab is open, holding only the invented example and your clicks within it. It is strictly necessary for the demonstration to work as a single page you move around in, which is why there is no banner, and it contains nothing that identifies you.</li>
+    <li><b>Anything else</b> (pixels, fingerprinting, embedded players, social buttons): none.</li>
+  </ul>
+  <p>If that ever changes, this page will change first, and anything that is not strictly necessary will ask you before it is set.</p>
+</section>
+
+<section class="sec">
+  <h2 class="rule">Hosting</h2>
+  <p>The site is a set of static files served by <b>GitHub Pages</b>. Like every web server, GitHub's servers see the internet address (IP address) your device uses, the page you asked for and the kind of browser you are using, and GitHub may keep that in its logs for security and to meet its legal obligations. We do not receive those logs and cannot see them. GitHub acts under its own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>. The domain name is registered with Cloudflare, which answers the question "where is onethread.uk?" when your browser asks it; it does not carry the pages themselves.</p>
+</section>
+
+<section class="sec">
+  <h2 class="rule">If you make your own sheets</h2>
+  <p>The information a family puts into the sheet-maker, and the printed sheets that come out, are the family's own and will often include health information about a child. A few practical points, because this is a privacy page and that is the information that matters most:</p>
+  <ul>
+    <li>Save the file somewhere you control and would be comfortable losing a phone or laptop with, such as a password-protected device or an encrypted drive. The file is plain text, readable by anyone who has it.</li>
+    <li>Give each professional only their sheet, and write on the cover sheet who has what. That is the point of the design.</li>
+    <li>Ask for sheets back, or for them to be destroyed, when they are no longer needed.</li>
+    <li>The account of what happened is written for the people the young person names. Do not photograph it or send it by message to anyone else.</li>
+    <li>OneThread has no copy of any of it and cannot recover a lost file.</li>
+  </ul>
+</section>
+
+<section class="sec">
+  <h2 class="rule">Children and young people</h2>
+  <p>The site is written for adults and professionals, and for young people using it with a parent. It collects nothing from anyone, of any age. A young person who makes their own sheets owns what they write, and the sheet-maker is built so that a parent cannot see it unless the young person shows them.</p>
+</section>
+
+<section class="sec">
+  <h2 class="rule">Your rights, and complaints</h2>
+  <p>Under UK data protection law you have rights of access, correction, erasure and objection over personal information an organisation holds about you. The Novacene Ltd holds none from this site, so there is nothing to exercise those rights over here; if you believe otherwise, write to the contact address above and we will answer within a month. You can complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk</a> at any time.</p>
+</section>
+
+<section class="sec">
+  <h2 class="rule">Changes</h2>
+  <p>If OneThread ever adds a donation page, a mailing list or any feature that handles information, this page will be updated before it goes live, with the date at the top, and the change will be visible in the <a href="https://github.com/TheNovacene/thread/commits/main/privacy/index.html">public history</a> of this page's source.</p>
+</section>
+</main>
+<footer><div class="in"><span>OneThread. Tell it once.</span><a href="../">Home</a><a href="https://github.com/TheNovacene/thread">Source</a><a href="https://github.com/TheNovacene/thread/blob/main/STEWARDSHIP.md">Stewardship</a></div></footer>
+</body>
+</html>

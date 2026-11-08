@@ -8,8 +8,14 @@
 <meta name="description" content="Make your own OneThread paper sheets. Everything stays in your browser; nothing is sent anywhere.">
 <title>Make your OneThread sheets</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231B2430'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff'%3ET%3C/text%3E%3Cpath d='M3 17 C 10 12, 16 22, 22 17 S 28 13, 31 16' fill='none' stroke='%23B9121B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-400-normal.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-700-normal.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(../fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(../fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url(../fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url(../fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
 :root{
   --bg:#F5F4F0; --surface:#FFFFFF; --fg:#1B2430; --muted:#5C6672; --line:#D9DAD5; --soft:#EBEBE6;
   --accent:#1F4E8C; --accent-ink:#FFFFFF; --accent-soft:#DDE7F4; --thread:#B9121B;
@@ -227,7 +233,7 @@ textarea{min-height:72px;resize:vertical;line-height:1.45}
   <p class="lead">Check each one, then print it or save it as a PDF from the print dialog (choose "Save as PDF" as the printer). Print all of them at once, or one at a time. Then <b>Save to a file</b> on the Start step if you want to come back and change anything later.</p>
   <div class="row"><button class="btn thread" id="printAll">Print all sheets</button><button class="btn" id="saveBtn2">Save to a file</button><a class="btn ghost" href="#start">Back to start</a></div>
   <div id="sheets"></div>
-  <p class="foot">These sheets are made by you, on your computer, for the people you choose. OneThread has no copy and cannot see them. Code under AGPL-3.0, words under CC BY-SA 4.0; onethread.uk.</p>
+  <p class="foot">These sheets are made by you, on your computer, for the people you choose. OneThread has no copy and cannot see them. Code under AGPL-3.0, words under CC BY-SA 4.0; onethread.uk. <a href="../privacy/">Privacy and cookies</a>.</p>
 </section>
 </main>
 <div class="toast" id="toast"></div>
