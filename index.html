@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Thread: a care record held by the young person it is about. Tell it once. A working prototype built on the PRSB About Me standard, the GP record, digital Individual Support Plans and existing NHS and DfE sign-ins.">
+<meta property="og:title" content="Thread">
+<meta property="og:description" content="A care record held by the young person it is about. Tell it once.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231B2430'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff'%3ET%3C/text%3E%3Cpath d='M3 17 C 10 12, 16 22, 22 17 S 28 13, 31 16' fill='none' stroke='%23B9121B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Thread</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  /* Layout: phone-first single column (max 760px); sticky top bar carries four views; the red thread is the one brand flourish, used in the wordmark and as a short rule under each section heading */
+  --bg:#F5F4F0; --surface:#FFFFFF; --fg:#1B2430; --muted:#5C6672; --line:#D9DAD5; --soft:#EBEBE6;
+  --accent:#1F4E8C; --accent-ink:#FFFFFF; --accent-soft:#DDE7F4;
+  --thread:#B9121B;
+  --crit:#B0271F; --crit-soft:#F9E2E0; --warn:#8A5800; --warn-soft:#F7EACF; --ok:#2A7A4A; --ok-soft:#DCF0E3;
+  --story:#6A4B27; --story-soft:#F4EBDD;
+  --display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --body:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161C; --surface:#1A2129; --fg:#E8EBEE; --muted:#9AA6B3; --line:#2E3842; --soft:#222B35;
+    --accent:#8CB8F0; --accent-ink:#11161C; --accent-soft:#1E3350;
+    --thread:#F0656C;
+    --crit:#F2928A; --crit-soft:#3C1F1D; --warn:#E9BC63; --warn-soft:#3A2E13; --ok:#80CC9C; --ok-soft:#173224;
+    --story:#D9B58A; --story-soft:#33281C;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161C; --surface:#1A2129; --fg:#E8EBEE; --muted:#9AA6B3; --line:#2E3842; --soft:#222B35;
+  --accent:#8CB8F0; --accent-ink:#11161C; --accent-soft:#1E3350;
+  --thread:#F0656C;
+  --crit:#F2928A; --crit-soft:#3C1F1D; --warn:#E9BC63; --warn-soft:#3A2E13; --ok:#80CC9C; --ok-soft:#173224;
+  --story:#D9B58A; --story-soft:#33281C;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-0.01em}
+h1{font-size:clamp(28px,6vw,38px);font-weight:700}
+h1 span{color:var(--muted);font-weight:500;font-size:.6em;margin-left:.3em}
+h2{font-size:22px;font-weight:700}
+h2.rule::after{content:"";display:block;width:44px;height:2px;background:var(--thread);margin-top:8px;border-radius:2px}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .in{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{height:34px;width:auto;display:block;color:var(--fg)}
+.brand small{display:block;font-size:12px;color:var(--muted);line-height:1.2}
+.seg{display:flex;gap:4px;margin-left:auto;background:var(--soft);padding:3px;border-radius:999px;flex-wrap:wrap}
+.seg a{padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font-size:14px;font-weight:700;white-space:nowrap}
+.seg a.on{background:var(--accent);color:var(--accent-ink)}
+main{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 56px;display:grid;gap:32px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.lead{max-width:62ch}
+.small{font-size:14px}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row.between{justify-content:space-between}
+.btn{font:inherit;font-weight:700;font-size:15px;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.ghost{background:transparent}
+.btn.danger{background:var(--crit-soft);color:var(--crit);border-color:transparent}
+.btn:focus-visible,.chip:focus-visible,.rolebtn:focus-visible,.input:focus-visible,.seg a:focus-visible,.sw:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px}
+.sec{display:grid;gap:14px}
+.holder{display:grid;gap:10px}
+.why{font-family:var(--display);font-size:20px;font-weight:500;color:var(--accent)}
+.code{grid-template-columns:auto 1fr;align-items:start;gap:18px}
+@media (max-width:520px){.code{grid-template-columns:1fr}}
+.code>div{display:grid;gap:10px;min-width:0}
+.qr{background:#fff;padding:12px;border-radius:10px;width:200px;max-width:100%;display:grid;place-items:center}
+.qr img,.qr canvas{max-width:100%;height:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;font-weight:700;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chip.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}
+.tag.ver{background:var(--ok-soft);color:var(--ok)}
+.tag.self{background:var(--story-soft);color:var(--story)}
+.tag.role{background:var(--accent-soft);color:var(--accent)}
+.tag.std{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+.pill.high{background:var(--crit-soft);color:var(--crit)}
+.pill.medium{background:var(--warn-soft);color:var(--warn)}
+.pill.low{background:var(--ok-soft);color:var(--ok)}
+.group{display:grid;border-top:2px solid var(--line)}
+.group h3{padding:12px 0 2px}
+.group .gnote{font-size:13px;color:var(--muted);padding-bottom:4px;max-width:65ch}
+.field{display:grid;gap:4px;padding:12px 0;border-top:1px solid var(--line)}
+.field .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.field .val{max-width:65ch}
+.field.crit .val{font-weight:700}
+.field.stale{border-left:4px solid var(--crit);padding-left:12px}
+.field.stale .val{color:var(--crit)}
+.field.due{border-left:4px solid var(--warn);padding-left:12px}
+.field.due .val{color:var(--warn)}
+.field .src{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag.rv.stale{background:var(--crit-soft);color:var(--crit)}
+.tag.rv.due{background:var(--warn-soft);color:var(--warn)}
+.tag.rv.ok{background:var(--ok-soft);color:var(--ok)}
+.card.rvstale{border-left:4px solid var(--crit)}
+.card.rvdue{border-left:4px solid var(--warn)}
+.group.story{background:var(--story-soft);border-radius:12px;padding:4px 16px 12px;border-top:0}
+.group.story .field{border-top:0}
+.group.story .val{font-family:var(--display);font-size:18px;font-weight:500;line-height:1.4}
+.group.aboutme{border-top-color:var(--thread)}
+.permlist{display:grid;border-top:1px solid var(--line)}
+.perm{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.perm span{display:grid;min-width:0}
+.perm small{color:var(--muted);font-size:13px}
+.sw{appearance:none;-webkit-appearance:none;width:44px;height:26px;border-radius:999px;background:var(--line);position:relative;flex:none;cursor:pointer;margin:0}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--surface);transition:transform .15s}
+.sw:checked{background:var(--accent)}
+.sw:checked::after{transform:translateX(18px)}
+.sit{display:grid;gap:6px;padding:12px 0;border-top:1px solid var(--line)}
+.sit.stale{border-left:4px solid var(--crit);padding-left:12px}
+.sit.due{border-left:4px solid var(--warn);padding-left:12px}
+.sit .top2{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.sit .need{max-width:65ch}
+.rvnote.stale{color:var(--crit);font-weight:700}
+.rvnote.due{color:var(--warn);font-weight:700}
+.log{display:grid;border-top:1px solid var(--line)}
+.entry{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.entry time{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.entry .what{color:var(--muted);grid-column:2}
+.entry.bg{border-left:4px solid var(--crit);padding-left:12px}
+.entry.stale{border-left:4px solid var(--warn);padding-left:12px}
+.alert{border-left:4px solid var(--crit)}
+.rolegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.rolebtn{font:inherit;text-align:left;display:grid;gap:2px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.rolebtn small{color:var(--muted);font-size:13px}
+.rolebtn:hover{border-color:var(--accent)}
+.input{font:inherit;width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.lbl2{font-size:14px;font-weight:700;display:block;margin-bottom:4px}
+.bg{border:1px dashed var(--crit);border-radius:12px;padding:14px;display:grid;gap:10px}
+.told{background:var(--story-soft);color:var(--story);padding:14px 16px;border-radius:12px;font-family:var(--display);font-size:18px;font-weight:500;max-width:65ch}
+.foot{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:8px;max-width:65ch}
+.prose{display:grid;gap:12px;max-width:65ch}
+.hard{display:grid;gap:16px}
+.hard div{display:grid;gap:4px;max-width:65ch}
+.table{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px 10px 0;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+td:first-child{font-weight:700;white-space:nowrap}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:start}
+.flow .arrow{align-self:center;color:var(--thread);font-size:28px;line-height:1;padding-top:40px}
+.flow .col{display:grid;gap:8px;min-width:0}
+.flow .col h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding-bottom:4px;border-bottom:2px solid var(--line)}
+.flow .col.mid h3{border-bottom-color:var(--thread);color:var(--thread)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.box b{display:block}
+.box small{color:var(--muted)}
+.col.mid .box{border-color:var(--thread)}
+@media (max-width:640px){.flow{grid-template-columns:1fr}.flow .arrow{padding:0;text-align:center;transform:rotate(90deg)}}
+.stake{display:grid;gap:10px}
+.stk{display:grid;grid-template-columns:1fr;gap:4px;padding:12px 0;border-top:1px solid var(--line)}
+@media (min-width:640px){.stk{grid-template-columns:1.1fr 1.6fr 1.3fr;gap:14px}}
+.stk div{min-width:0;font-size:15px}
+.stk .k{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;font-weight:700}
+.red{color:var(--thread)}
+.hero{display:grid;gap:14px;padding-block:8px 4px}
+.hero .big{font-family:var(--display);font-weight:700;font-size:clamp(34px,8vw,56px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
+.hero .big em{font-style:normal;color:var(--thread)}
+.hero .logo{height:56px}
+.scenes{display:grid;gap:12px}
+.scene{display:grid;gap:6px;padding:14px 16px;border-left:3px solid var(--thread);background:var(--surface);border-radius:0 12px 12px 0}
+.scene p{max-width:60ch}
+.scene .who{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.stat{display:grid;gap:2px;padding:12px 0;border-top:2px solid var(--line)}
+.stat .n{font-family:var(--display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat .d{font-size:14px;color:var(--muted);max-width:28ch}
+.principles{display:grid;gap:10px;padding:0;margin:0;list-style:none;max-width:none}
+.principles li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+.principles li::before{content:"";width:18px;height:2px;background:var(--thread);display:block;transform:translateY(-4px)}
+.cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.cta a{display:grid;gap:2px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none}
+.cta a b{font-family:var(--display)}
+.cta a small{color:var(--muted);font-size:13px}
+.cta a:hover{border-color:var(--accent)}
+.donate{border-left:4px solid var(--thread)}
+.btn.thread{background:var(--thread);border-color:var(--thread);color:#fff}
+.btn.thread[aria-disabled="true"]{opacity:.55;cursor:default}
+@media (prefers-reduced-motion:reduce){.sw::after{transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 156 40" role="img" aria-label="Thread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" font-weight="700" fill="currentColor">Thread</text><path d="M-4 21 C 18 13, 36 29, 58 21 S 96 13, 114 21 c 8 3, 15 -1, 13 -6 c -2 -5, -10 -3, -7 2 c 3 5, 15 5, 28 1" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <small>Tell it once.<br>A record held by the person it is about.</small>
+  </div>
+  <nav class="seg" id="nav">
+    <a href="#home" data-v="home">Why</a>
+    <a href="#owner" data-v="owner">Sam</a>
+    <a href="#scan" data-v="scan">Scan</a>
+    <a href="#fit" data-v="fit">How it fits</a>
+    <a href="#ask" data-v="ask">The ask</a>
+  </nav>
+</div></header>
+<main id="main"></main>
+
+<script>
+(function(){
+'use strict';
+const STORE='thread-demo-v2';
+/* Fill these in when the pages exist. An empty DONATE_URL shows "opening soon" instead of a dead link. */
+const DONATE_URL='';
+const DONATE_PLATFORM='';
+const CONTACT='';
+
+const ROLES=[
+ {id:'paramedic',name:'Paramedic',body:'HCPC register',signin:'NHS Care Identity (CIS2)',emergency:true},
+ {id:'ae',name:'A&E doctor or nurse',body:'GMC or NMC register',signin:'NHS Care Identity (CIS2)',emergency:true},
+ {id:'gp',name:'GP',body:'GMC register',signin:'NHS Care Identity (CIS2)'},
+ {id:'pharm',name:'Pharmacist',body:'GPhC register',signin:'NHS Care Identity (CIS2)'},
+ {id:'physio',name:'Physiotherapist',body:'HCPC register',signin:'NHS Care Identity (CIS2)'},
+ {id:'camhs',name:'CAMHS clinician',body:'NMC, HCPC or GMC register',signin:'NHS Care Identity (CIS2)'},
+ {id:'school',name:'School safeguarding lead',body:'Teacher reference number',signin:'DfE Sign-in'},
+ {id:'send',name:'SENCO or SEND caseworker',body:'School or council staff',signin:'DfE Sign-in, or GOV.UK One Login with a council voucher'},
+ {id:'coach',name:'PE teacher or sports coach',body:'Vouched for by school or club',signin:'Organisation voucher'},
+ {id:'support',name:'Youth or family support worker',body:'Vouched for by organisation',signin:'Organisation voucher'},
+ {id:'coord',name:'Named recovery coordinator',body:'Vouched for by commissioner',signin:'Commissioner voucher'}
+];
+const STD={
+ pds:{t:'NHS login',d:'Identity comes from NHS login and the NHS number. Thread adds nothing here.'},
+ gp:{t:'GP record, read live',d:'Read from the GP record each time the code is scanned. Thread never keeps its own copy.'},
+ aboutme:{t:'About Me (PRSB v2.0.1)',d:'Sam’s own words, in the NHS-endorsed About Me structure, so any shared care record can take them unchanged.'},
+ plan:{t:'Care plan',d:'From the clinic letter or care plan, with a review date.'},
+ isp:{t:'Digital ISP, EHCP Section A',d:'The school plan. From 2029 this is the digital Individual Support Plan; for a child with an EHC plan, Section A.'},
+ shcr:{t:'Shared care record',d:'The care team, as the local shared care record already lists it.'},
+ thread:{t:'Thread only',d:'Held only in Thread, shared only with the people Sam names.'}
+};
+const GROUPS=[
+ ['identity','Who I am',''],
+ ['emergency','In an emergency','Clinical lines here are read from the GP record when the code is scanned. Thread holds no copy.'],
+ ['clinical','Hospital and treatment',''],
+ ['recovery','Getting better',''],
+ ['aboutme','About me, in my words','The seven headings of the PRSB About Me standard. Written once by Sam; the same text can go to the shared care record, the school plan and an EHC plan’s Section A.'],
+ ['education','School','The school plan. Today it lives in the school; from 2029 in the digital Individual Support Plan.'],
+ ['network','People around me',''],
+ ['story','What happened, told once','An About Me item with its own sharing list. Only the people Sam names can read it.']
+];
+const FIELDS=[
+ {id:'name',g:'identity',l:'Name',v:'Sam Reid',s:'NHS login',k:'ver',std:'pds'},
+ {id:'dob',g:'identity',l:'Date of birth',v:'2 June 2010 (16)',s:'NHS login',k:'ver',std:'pds'},
+ {id:'nhs',g:'identity',l:'NHS number',v:'999 123 4567',s:'NHS login',k:'ver',std:'pds'},
+ {id:'contacts',g:'emergency',l:'Emergency contacts',v:'Sara Reid (mum) 07700 900123. Dev Reid (dad) 07700 900456. Call Sara first.',s:'Sam',k:'self',std:'aboutme'},
+ {id:'allergies',g:'emergency',l:'Allergies',v:'Sesame: anaphylaxis in 2022. Carries an adrenaline auto-injector (300 micrograms); a second one is kept in the school office. No known drug allergies.',s:'GP record, confirmed 22 Sep 2026',k:'ver',std:'gp',crit:true,r:'2027-09-22'},
+ {id:'meds',g:'emergency',l:'Current medication',v:'Paracetamol 1 g, up to four times a day. Ibuprofen 400 mg with food, up to three times a day. Adrenaline auto-injector 300 micrograms for the sesame allergy, carried at all times.',s:'GP record, from the clinic letter of 16 Oct 2026',k:'ver',std:'gp',crit:true,r:'2026-11-14'},
+ {id:'alerts',g:'emergency',l:'Alerts',v:'Titanium nail and two screws in the left thigh bone since 20 Sep 2026. Tell the radiographer before any MRI. Concussion on 19 Sep: headaches and tiredness continue. Sesame allergy, see above.',s:'GP record, from the discharge summary of 25 Sep 2026',k:'ver',std:'gp',crit:true,r:'2026-11-14'},
+ {id:'injuries',g:'clinical',l:'Injuries and surgery',v:'Knocked off a bicycle by a car on 19 Sep 2026. Broken left thigh bone, fixed with a nail on 20 Sep. Broken right wrist, in a cast until 30 Oct. Concussion, nothing on the scan. Grazes down the left side, healed.',s:'GP record, from the discharge summary of 25 Sep 2026',k:'ver',std:'gp'},
+ {id:'followup',g:'clinical',l:'Follow-up',v:'Fracture clinic with Ms Adeyemi on 14 Nov at 09:40. Physiotherapy at the community hospital on Tuesdays and Fridays. Concussion review with Dr Lawal was due by 7 Nov.',s:'Hospital and GP',k:'ver',std:'plan',r:'2026-11-07'},
+ {id:'restrictions',g:'recovery',l:'What I can and cannot do',v:'Two crutches, half weight through the left leg, until the fracture clinic says otherwise (earliest 14 Nov). No PE, no cycling, no contact sport. Right wrist: twenty minutes of writing, then a rest.',s:'Fracture clinic, 16 Oct',k:'ver',std:'plan',r:'2026-11-14'},
+ {id:'mh',g:'recovery',l:'Mental health support',v:'Referred to CAMHS on 2 Oct for anxiety and poor sleep since the accident. First appointment 18 Nov. No previous mental health history.',s:'GP record, 2 Oct',k:'ver',std:'gp',r:'2026-11-18'},
+ {id:'important',g:'aboutme',l:'What is most important to me',v:'Getting back on my bike one day, and back to rugby before that. Being treated as me, not as the accident. My A-levels.',s:'Sam, 28 Sep',k:'self',std:'aboutme',secA:true},
+ {id:'people',g:'aboutme',l:'People who are important to me',v:'Mum and Dad. My friend Priya. My rugby coach, Mr Danso, who has visited every week. My grandad, who I ring on Sundays.',s:'Sam, 28 Sep',k:'self',std:'aboutme'},
+ {id:'communicate',g:'aboutme',l:'How I communicate and how to communicate with me',v:'Tell me what you are about to do before you do it. If I go quiet I am not being rude, I am overwhelmed; give me a minute. Text before you ring.',s:'Sam, 28 Sep',k:'self',std:'aboutme'},
+ {id:'wellness',g:'aboutme',l:'My wellness',v:'Thigh aches by the evening and after physio. Paracetamol works within half an hour. Wrist is stiff first thing. Not sleeping well since the accident.',s:'Sam, 3 Nov',k:'self',std:'aboutme'},
+ {id:'dodont',g:'aboutme',l:'Please do and please do not',v:'Please do let me sit away from the window onto the road. Please do let Priya stay. Please do not take my arm to help me without asking. Please do not ask me to tell it again.',s:'Sam, 28 Sep',k:'self',std:'aboutme'},
+ {id:'support',g:'aboutme',l:'How and when to support me',v:'Traffic noise close to me, being driven fast or braking hard, and crossing at junctions are hard. Walk on the road side of me. Warn me before you brake. If you need to know what happened, read what I wrote.',s:'Sam, 28 Sep',k:'self',std:'aboutme'},
+ {id:'alsoknow',g:'aboutme',l:'Also worth knowing about me',v:'Close friends know. I am happy for classmates to know about the accident and the crutches, but not about the anxiety or CAMHS. Staff do not discuss it with students.',s:'Sam, 3 Nov',k:'self',std:'aboutme'},
+ {id:'return',g:'education',l:'Return to school',v:'Half days until 30 Oct, then full days with a rest break each morning in the sixth-form study room. Leave lessons five minutes early to miss the corridors. Lift pass. Laptop instead of handwriting while the wrist recovers.',s:'Ms Khalil and Sam',k:'ver',std:'isp',r:'2026-10-31'},
+ {id:'safe',g:'education',l:'Safe adult at school',v:'Ms Khalil (safeguarding lead). If she is out, Mr Grant. Sam can leave any lesson to find them.',s:'Ms Khalil',k:'ver',std:'isp'},
+ {id:'exams',g:'education',l:'Exams and work',v:'A-level mocks in January. Access arrangements requested: a laptop and rest breaks.',s:'School',k:'ver',std:'isp'},
+ {id:'team',g:'network',l:'Who is involved',v:'Ms Adeyemi, consultant orthopaedic surgeon. Dr Lawal, GP. Hannah Price, physiotherapist. CAMHS, first appointment 18 Nov. Ms Khalil, school safeguarding lead. Marcus Bell, hospital youth worker. Road-crash family support service, reference RS-26-0417.',s:'Shared care record',k:'ver',std:'shcr'},
+ {id:'story',g:'story',l:'In my words',v:'I was cycling home from training on a Saturday in September. A car turned across me at the junction by the park. I do not remember the impact. I woke up in the ambulance with a paramedic called Jess talking to me. The driver stopped and stayed. My leg was broken and so was my wrist. I am all right with people knowing that much. I would rather you read this than ask me to say it.',s:'Sam, 28 Sep',k:'self',std:'thread'}
+];
+const EMERGENCY_FIELDS=['name','dob','nhs','contacts','allergies','meds','alerts'];
+const DEFAULT_PERMS={
+ paramedic:['name','dob','nhs','contacts','allergies','meds','alerts','injuries'],
+ ae:['name','dob','nhs','contacts','allergies','meds','alerts','injuries','followup','communicate','dodont'],
+ gp:['name','dob','nhs','contacts','allergies','meds','alerts','injuries','followup','restrictions','wellness','communicate','dodont','support','mh','team'],
+ pharm:['name','dob','allergies','meds'],
+ physio:['name','dob','allergies','alerts','injuries','followup','restrictions','wellness','communicate','dodont'],
+ camhs:['name','dob','nhs','contacts','meds','important','people','communicate','wellness','dodont','support','mh','team','story'],
+ school:['name','contacts','allergies','alerts','restrictions','important','communicate','dodont','support','alsoknow','return','safe','exams','team'],
+ send:['name','contacts','important','people','communicate','dodont','support','alsoknow','return','safe','exams','team'],
+ coach:['name','contacts','allergies','restrictions','dodont'],
+ support:['name','contacts','important','people','communicate','dodont','support','team','story'],
+ coord:['name','dob','nhs','contacts','allergies','meds','alerts','injuries','followup','restrictions','mh','important','people','communicate','wellness','dodont','support','alsoknow','return','safe','exams','team']
+};
+const SITUATIONS=[
+ {name:'Allergic reaction',level:'high',roles:['paramedic','ae','school','coach','coord'],fields:['allergies','contacts'],need:'Sesame. Adrenaline auto-injector in the front pocket of the bag, a second in the school office. Use it first, then call 999. Then call Sara.'},
+ {name:'Collapses or is found unwell',level:'high',roles:['paramedic','ae','coord'],fields:['allergies','meds','alerts','contacts'],need:'Sesame allergy, auto-injector in the bag. Metal nail in the left thigh since 20 Sep. Concussion in September. Call Sara first.'},
+ {name:'Needs surgery, an anaesthetic or a scan',level:'high',roles:['ae','gp','coord'],fields:['alerts','injuries','meds'],need:'Titanium nail and screws in the left thigh bone: tell the radiographer before any MRI. Sesame allergy. No known drug allergies.'},
+ {name:'PE, sport or cycling',level:'high',roles:['coach','school','physio','coord'],fields:['restrictions','followup'],need:'Crutches, half weight, no PE, no cycling until the fracture clinic says so. Earliest 14 Nov. Check the record again after that date.'},
+ {name:'Back in school',level:'medium',roles:['school','send','coach','coord'],fields:['return','safe','alsoknow','restrictions'],need:'Full days with a morning rest break, leave lessons early, lift pass, laptop. Safe adult is Ms Khalil. Sam decides what classmates are told.'},
+ {name:'Anxious, panicky or overwhelmed',level:'medium',roles:['school','send','camhs','support','coord'],fields:['communicate','dodont','support','mh'],need:'Away from the window onto the road. Say what you will do before you do it. Priya can stay. Do not ask about the accident.'},
+ {name:'Given or collecting medication',level:'medium',roles:['pharm','gp','coord'],fields:['meds','allergies'],need:'Ibuprofen with food, no more than three a day. Paracetamol no more than four a day. Check the auto-injector expiry date.'},
+ {name:'Asked what happened',level:'low',roles:['support','camhs','coord','school','send'],fields:['story','dodont'],need:'Sam has written it once. Read it if Sam has shared it with you. Do not ask Sam to repeat it.'}
+];
+const SEED_LOG=[
+ {t:'Sat 19 Sep 18:47',role:'paramedic',who:'Emergency access, not signed in',what:'Emergency fields only: contacts, allergies, medication, alerts',bg:true},
+ {t:'Sat 19 Sep 19:32',role:'ae',who:'Dr R. Mensah, CIS2 (simulated)',what:'11 of 23 fields'},
+ {t:'Fri 2 Oct 10:04',role:'gp',who:'Dr A. Lawal, CIS2 (simulated)',what:'16 of 23 fields'},
+ {t:'Tue 13 Oct 14:10',role:'physio',who:'H. Price, CIS2 (simulated)',what:'10 of 23 fields'},
+ {t:'Mon 2 Nov 15:20',role:'school',who:'Ms F. Khalil, DfE Sign-in (simulated)',what:'14 of 23 fields'}
+];
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fmtD=iso=>{const d=new Date(iso+'T00:00:00');return d.getDate()+' '+MONTHS[d.getMonth()]+(d.getFullYear()!==new Date().getFullYear()?' '+d.getFullYear():'');};
+function reviewState(f){
+ if(!f||!f.r)return null;
+ const d=new Date(f.r+'T00:00:00');const t=new Date();t.setHours(0,0,0,0);
+ const days=Math.round((d-t)/86400000);
+ if(days<0)return {s:'stale',label:'Out of date since '+fmtD(f.r)};
+ if(days<=14)return {s:'due',label:'Review due '+fmtD(f.r)+(days===0?', today':'')};
+ return {s:'ok',label:'Next review '+fmtD(f.r)};
+}
+function reviewCounts(fields){const st=fields.map(reviewState).filter(Boolean);return {stale:st.filter(x=>x.s==='stale').length,due:st.filter(x=>x.s==='due').length};}
+function reviewBanner(fields,advice){
+ const c=reviewCounts(fields);if(!c.stale&&!c.due)return '';
+ const parts=[];
+ if(c.stale)parts.push(c.stale+' item'+(c.stale>1?'s are':' is')+' out of date');
+ if(c.due)parts.push(c.due+(c.due>1?' are':' is')+' due for review');
+ return '<section class="card '+(c.stale?'rvstale':'rvdue')+'"><p class="eyebrow">Check before acting</p><p><b>'+parts.join(' and ')+'.</b> '+advice+'</p></section>';
+}
+function situationState(s){
+ const st=(s.fields||[]).map(id=>reviewState(FIELDS.find(f=>f.id===id))).filter(Boolean);
+ return st.some(x=>x.s==='stale')?'stale':st.some(x=>x.s==='due')?'due':null;
+}
+
+function fresh(){return {perms:JSON.parse(JSON.stringify(DEFAULT_PERMS)),log:SEED_LOG.map(e=>Object.assign({},e)),token:'7k2m-qd4a',paused:false,reviewed:false,permRole:'paramedic',showCode:false};}
+function load(){try{const r=localStorage.getItem(STORE);if(!r)return null;const s=JSON.parse(r);if(!s||!s.perms||!s.log)return null;return s;}catch(e){return null;}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+let state=load()||fresh();
+let scan={step:1,role:null,verified:'',until:0,preview:false,bg:false,stale:false,byCode:false,checking:false};
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const role=id=>ROLES.find(r=>r.id===id);
+const roleName=id=>{const r=role(id);return r?r.name:id;};
+const groupName=id=>{const g=GROUPS.find(x=>x[0]===id);return g?g[1]:id;};
+const allowed=(rid,fid)=>(state.perms[rid]||[]).indexOf(fid)>=0;
+const rolesFor=fid=>ROLES.filter(r=>allowed(r.id,fid));
+const now=()=>{const d=new Date();const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];return days[d.getDay()]+' '+d.getDate()+' '+MONTHS[d.getMonth()]+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');};
+const hhmm=ms=>{const d=new Date(ms);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');};
+function newToken(){const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<8;i++){s+=a[Math.floor(Math.random()*a.length)];if(i===3)s+='-';}return s;}
+function scanUrl(){return location.origin+location.pathname+'#scan-'+state.token;}
+
+/* ---------- Owner view ---------- */
+function codeCard(){
+ return '<section class="card code">'+
+  '<div class="qr" id="qr"></div>'+
+  '<div><p class="eyebrow">Sam’s code</p>'+
+  '<p class="mono">THREAD-'+esc(state.token.toUpperCase())+'</p>'+
+  '<p class="small">Scan it with a phone and it opens the professional view of this page. The code is a pointer to the record. It carries no health data, so a photo of it is worth nothing on its own.</p>'+
+  '<div class="row"><button class="btn" id="rotate">Issue a new code</button></div>'+
+  '<p class="small muted">The old code stops working the moment a new one is issued. Sam can do this at any time, for any reason.</p></div>'+
+ '</section>';
+}
+function bgAlert(){
+ const e=state.log.filter(x=>x.bg);
+ if(!e.length||state.reviewed)return '';
+ const last=e[e.length-1];
+ return '<section class="card alert"><p class="eyebrow">Emergency access was used</p>'+
+  '<p><b>'+esc(last.t)+'</b>, by a '+esc(roleName(last.role))+' who did not sign in. They saw the emergency fields only. Sara was sent a message at the same moment.</p>'+
+  '<p class="small muted">Emergency access exists so that nobody is refused care because a phone is locked. The record was there before the ambulance was. It is always recorded, always reported to Sam, and the person using it is asked to say why. The Summary Care Record works the same way.</p>'+
+  '<div class="row"><button class="btn" id="review">Mark as seen</button></div></section>';
+}
+function permsSection(){
+ const n=(state.perms[state.permRole]||[]).length;
+ return '<section class="sec"><h2 class="rule">Who sees what</h2>'+
+  '<p class="lead">Each role sees only the slice Sam has allowed. Choose a role, then switch lines on or off. These are Sam’s defaults; a real build would start from defaults agreed with each profession.</p>'+
+  '<div class="chips">'+ROLES.map(r=>'<button class="chip '+(r.id===state.permRole?'on':'')+'" data-role="'+r.id+'">'+esc(r.name)+'</button>').join('')+'</div>'+
+  '<div class="permlist">'+FIELDS.map(f=>'<label class="perm" for="sw-'+state.permRole+'-'+f.id+'"><span><b>'+esc(f.l)+'</b><small>'+esc(groupName(f.g))+'</small></span><input type="checkbox" class="sw" id="sw-'+state.permRole+'-'+f.id+'" data-f="'+f.id+'" '+(allowed(state.permRole,f.id)?'checked':'')+'></label>').join('')+'</div>'+
+  '<div class="row"><button class="btn" id="preview">Preview as '+esc(roleName(state.permRole))+'</button><span class="small muted" id="permcount">'+n+' of '+FIELDS.length+' lines</span></div>'+
+ '</section>';
+}
+function fieldHtml(f,showSeen){
+ const seen=rolesFor(f.id);const rv=reviewState(f);const sd=STD[f.std];
+ return '<div class="field '+(f.crit?'crit':'')+' '+(rv?rv.s:'')+'">'+
+  '<span class="lbl">'+esc(f.l)+'</span>'+
+  '<p class="val">'+esc(f.v)+'</p>'+
+  '<div class="src"><span class="tag '+f.k+'">'+(f.k==='ver'?'Confirmed':'Sam wrote this')+'</span><span>'+esc(f.s)+'</span>'+
+  (sd?'<span class="tag std" title="'+esc(sd.d)+'">'+esc(sd.t)+'</span>':'')+
+  (f.secA?'<span class="tag std">EHCP Section A</span>':'')+
+  (rv?'<span class="tag rv '+rv.s+'">'+esc(rv.label)+'</span>':'')+
+  (showSeen?'<span>· seen by '+(seen.length?seen.length+' role'+(seen.length>1?'s':''):'nobody but Sam')+'</span>':'')+
+  '</div></div>';
+}
+function groupsHtml(fields,showSeen){
+ return GROUPS.filter(([gid])=>fields.some(f=>f.g===gid)).map(([gid,gname,gnote])=>'<div class="group '+gid+'"><h3>'+esc(gname)+'</h3>'+(gnote?'<p class="gnote">'+esc(gnote)+'</p>':'')+fields.filter(f=>f.g===gid).map(f=>fieldHtml(f,showSeen)).join('')+'</div>').join('');
+}
+function recordSection(){
+ return '<section class="sec"><h2 class="rule">The record</h2>'+
+  '<p class="lead">Every line says where it came from and where it already lives. What Sam wrote and what a clinician confirmed look different, on purpose. Anything a professional might act on carries a review date: amber two weeks before, red once it has passed.</p>'+
+  groupsHtml(FIELDS,true)+
+ '</section>';
+}
+function situationsSection(roleFilter){
+ const list=roleFilter?SITUATIONS.filter(s=>s.roles.indexOf(roleFilter)>=0):SITUATIONS;
+ if(!list.length)return '';
+ return '<section class="sec"><h2 class="rule">'+(roleFilter?'Relevant to you now':'Situations')+'</h2>'+
+  (roleFilter?'':'<p class="lead">The risk matrix. Each situation names who it is for and what they need to know. Professionals see only the rows for their role, and a row turns amber or red when a line it relies on is due or out of date.</p>')+
+  '<div>'+list.map(s=>{const ss=situationState(s);return '<div class="sit '+(ss||'')+'">'+
+    '<div class="top2"><h3>'+esc(s.name)+'</h3><span class="pill '+s.level+'">'+s.level+'</span></div>'+
+    '<p class="need">'+esc(s.need)+'</p>'+
+    (ss?'<p class="small rvnote '+ss+'">'+(ss==='stale'?'Relies on information that is out of date. Check before acting.':'Relies on information that is due for review.')+'</p>':'')+
+    (roleFilter?'':'<div class="chips">'+s.roles.map(r=>'<span class="tag role">'+esc(roleName(r))+'</span>').join('')+'</div>')+
+  '</div>';}).join('')+'</div></section>';
+}
+function logSection(){
+ return '<section class="sec"><h2 class="rule">Who has looked</h2>'+
+  '<p class="lead">Every view is recorded here, newest first. Sam can see it at any time. Nobody can look without leaving a trace.</p>'+
+  '<div class="log">'+state.log.slice().reverse().map(e=>'<div class="entry '+(e.bg?'bg':'')+' '+(e.stale?'stale':'')+'"><time>'+esc(e.t)+'</time><div><b>'+esc(roleName(e.role))+'</b> · '+esc(e.who)+'</div><div class="what">'+esc(e.what)+'</div></div>').join('')+'</div>'+
+ '</section>';
+}
+function renderOwner(){
+ const views=state.log.filter(e=>!e.stale).length, bg=state.log.filter(e=>e.bg).length;
+ return '<section class="holder">'+
+  '<p class="eyebrow">This record is held by</p>'+
+  '<h1>Sam Reid<span>16</span></h1>'+
+  '<p class="small muted">Created May 2024 by Sam, with Sara, for the sesame allergy · Updated 3 Nov 2026 · '+views+' view'+(views===1?'':'s')+' · '+bg+' emergency access</p>'+
+  '<p class="why">Sam should never have to tell it twice.</p>'+
+  '<div class="row">'+
+   '<button class="btn primary" id="toggleCode">'+(state.showCode?'Hide my code':'Show my code')+'</button>'+
+   '<button class="btn '+(state.paused?'danger':'')+'" id="togglePause">'+(state.paused?'Access is paused. Resume':'Pause all access')+'</button>'+
+  '</div></section>'+
+  (state.showCode?codeCard():'')+
+  bgAlert()+
+  reviewBanner(FIELDS,'Red means the date for re-confirming it has passed. Amber means it is due within two weeks. Sara can ask the GP or the clinic to re-confirm; the colour clears when the review date is updated.')+
+  permsSection()+
+  recordSection()+
+  situationsSection(null)+
+  logSection()+
+  '<p class="foot"><button class="btn ghost" id="reset">Reset the demo</button><span>Sam is invented, and so is everything in this record. Nobody real is described.</span></p>';
+}
+function drawQR(){
+ const el=document.getElementById('qr');if(!el)return;el.innerHTML='';
+ if(typeof QRCode==='undefined'){el.innerHTML='<p class="small" style="color:#1B2430">QR library did not load. Code address:<br><span class="mono">'+esc(scanUrl())+'</span></p>';return;}
+ new QRCode(el,{text:scanUrl(),width:176,height:176,colorDark:'#1B2430',colorLight:'#FFFFFF',correctLevel:QRCode.CorrectLevel.M});
+}
+
+/* ---------- Professional view ---------- */
+function renderScan(){
+ if(scan.stale){
+  return '<section class="card access"><p class="eyebrow">Code replaced</p><h1>This code no longer works</h1>'+
+   '<p class="lead">Sam issued a new code after this one was made. Nothing has been shown. Ask Sam for the current code.</p>'+
+   '<p class="small muted">Sam has been told that an old code was used, and when.</p>'+
+   '<div class="row"><a class="btn" href="#owner">Back to Sam’s view</a></div></section>';
+ }
+ if(scan.step===1){
+  const list=state.paused?ROLES.filter(r=>r.emergency):ROLES;
+  return '<section class="card access">'+
+   '<p class="eyebrow">'+(scan.byCode?'You scanned Sam’s code':'Simulated scan of Sam’s code')+'</p>'+
+   '<h1>Who are you?</h1>'+
+   (state.paused?'<p class="lead"><b>Sam has paused this record.</b> Only emergency access is open, and it is reported to Sam.</p>':'<p class="lead">Sam Reid, 16, holds a Thread. You will see the part of it Sam has allowed for your role. Sam will see that you looked.</p>')+
+   '<div class="rolegrid">'+list.map(r=>'<button class="rolebtn" data-pick="'+r.id+'"><b>'+esc(r.name)+'</b><small>'+esc(r.signin)+'</small></button>').join('')+'</div>'+
+  '</section>';
+ }
+ const r=role(scan.role);
+ if(scan.step===2){
+  const vouched=r.signin.indexOf('voucher')>=0;
+  return '<section class="card access">'+
+   '<p class="eyebrow">'+esc(r.name)+'</p>'+
+   '<h1>Prove it is you</h1>'+
+   '<p class="lead">'+(vouched?'Your organisation vouches for you. Enter the reference it gave you.':'Sign in with '+esc(r.signin)+', the account you already use at work. Nothing new to register for.')+'</p>'+
+   '<div><label class="lbl2" for="reg">'+(vouched?'Organisation reference':'Work sign-in')+'</label><input class="input" id="reg" placeholder="'+(vouched?'e.g. RS-STAFF-0412':'e.g. your '+esc(r.signin)+' username')+'" autocomplete="off"></div>'+
+   '<div><label class="lbl2" for="nm">Your name</label><input class="input" id="nm" placeholder="As it appears on your register or in your organisation" autocomplete="off"></div>'+
+   '<div class="row"><button class="btn primary" id="verify" '+(scan.checking?'disabled':'')+'>'+(scan.checking?'Checking…':'Check and open')+'</button><button class="btn ghost" id="back">Back</button></div>'+
+   (r.emergency?'<div class="bg"><p><b>This is an emergency.</b> Open the emergency fields now without signing in. The access is recorded, Sam and Sara are told at once, and you will be asked to say why.</p><div class="row"><button class="btn danger" id="breakglass">Open emergency access</button></div></div>':'')+
+   '<p class="small muted">Simulated: this demo accepts anything. A real build hands you to '+esc(r.signin)+' and checks the professional register behind it.</p>'+
+  '</section>';
+ }
+ const fields=FIELDS.filter(f=>scan.bg?EMERGENCY_FIELDS.indexOf(f.id)>=0:allowed(r.id,f.id));
+ const storyShared=fields.some(f=>f.id==='story');
+ return '<section class="card access">'+
+  '<div class="row between"><div><p class="eyebrow">'+(scan.preview?'Preview':'Viewing as')+' '+esc(r.name)+'</p><p class="small">'+esc(scan.verified)+'</p></div><button class="btn ghost" id="end">'+(scan.preview?'Back to Sam':'End access')+'</button></div>'+
+  (scan.bg?'<p class="small"><b>Emergency access.</b> You are seeing the emergency fields only. Sam and Sara have been notified.</p>':'<p class="small">Access ends at '+hhmm(scan.until)+'. Sam can see this in the record’s log.</p>')+
+ '</section>'+
+ reviewBanner(fields,'Red items were due to be re-confirmed and have not been. Amber items are due within two weeks. Check with Sam, Sara or the named source before you act on them.')+
+ (scan.bg?'':situationsSection(r.id))+
+ '<section class="sec"><h2 class="rule">What Sam has shared with you</h2>'+
+  groupsHtml(fields,false)+
+  (storyShared?'':'<p class="told">Sam has written an account of what happened and chosen who can read it. You are not on that list, and you do not need to ask.</p>')+
+  '<p class="small muted">'+fields.length+' of '+FIELDS.length+' lines. Everything else stays with Sam.</p>'+
+ '</section>';
+}
+
+/* ---------- How it fits ---------- */
+function renderFit(){
+ const map=[
+  ['Name, date of birth, NHS number','NHS login and the Personal Demographics Service','Uses them. Adds nothing.'],
+  ['Allergies, medication, alerts, injuries','The GP record and Summary Care Record','Reads them live through existing GP Connect and NHS App APIs when the code is scanned. Keeps no copy.'],
+  ['Sam’s own words (seven headings)','PRSB About Me standard, v2.0.1','Stores them in that structure, so a shared care record or the school can take them unchanged.'],
+  ['What is most important to me','EHC plan Section A; the child’s views in the digital ISP','Written once by Sam. Exported to Section A or the ISP, rather than asked for again.'],
+  ['Return to school, safe adult, exams','The school today; the digital Individual Support Plan from 2029','Shows the school’s plan to the roles Sam allows. The school stays the author.'],
+  ['Who is involved','The local shared care record','Lists the team as the shared care record already holds it.'],
+  ['Care plan lines with review dates','Clinic letters and care plans','Carries a review date on each, and turns amber then red.'],
+  ['Finding the record in an emergency','The National Record Locator, which ambulance crews already use for crisis and end-of-life plans','Registers Thread as a record type, so a crew can find it from the NHS number without a code.'],
+  ['Who is scanning','NHS Care Identity (CIS2), DfE Sign-in, GOV.UK One Login','Hands the professional to the sign-in they already use. Issues nothing of its own.'],
+  ['Consent, by role','Nothing. Today a person cannot choose who sees which part.','This is Thread’s job.'],
+  ['The access log the person can read','Nothing the person can see.','This is Thread’s job.'],
+  ['What happened, told once','Nothing. The story is retold to every service.','This is Thread’s job.']
+ ];
+ return '<section class="holder"><p class="eyebrow">How it fits</p><h1>Three new things on top of things that exist</h1>'+
+  '<p class="lead">Thread adds consent by role, an access log the person can read, and a code that points at the record without carrying it. Everything else is read from, or written to, systems the NHS and schools already run. That is the whole design: make the smallest thing that gives a young person control, and attach it to what is already there.</p>'+
+  '<p class="lead">The Red Book stops at five. Thread picks up at eleven, when a child starts moving through the world without a parent beside them, and it is theirs from the start.</p>'+
+ '</section>'+
+ '<section class="sec"><h2 class="rule">At a glance</h2>'+
+  '<div class="flow">'+
+   '<div class="col"><h3>Already exists</h3>'+
+    '<div class="box"><b>NHS login, NHS number</b><small>Identity</small></div>'+
+    '<div class="box"><b>GP record, Summary Care Record</b><small>Allergies, medicines, problems</small></div>'+
+    '<div class="box"><b>PRSB About Me</b><small>The person’s own words</small></div>'+
+    '<div class="box"><b>Digital ISP, EHCP Section A</b><small>The school plan</small></div>'+
+    '<div class="box"><b>Shared care record</b><small>The care team</small></div>'+
+    '<div class="box"><b>National Record Locator</b><small>Finding a record elsewhere</small></div>'+
+    '<div class="box"><b>CIS2, DfE Sign-in, One Login</b><small>Who the professional is</small></div>'+
+   '</div><div class="arrow">→</div>'+
+   '<div class="col mid"><h3>Thread adds</h3>'+
+    '<div class="box"><b>Consent by role</b><small>Sam decides who sees which line</small></div>'+
+    '<div class="box"><b>An access log Sam can read</b><small>Every look leaves a trace</small></div>'+
+    '<div class="box"><b>A code that points, never carries</b><small>Revocable in a second</small></div>'+
+    '<div class="box"><b>Review dates</b><small>Amber at two weeks, red when passed</small></div>'+
+    '<div class="box"><b>Told once</b><small>The account, shared by name only</small></div>'+
+   '</div><div class="arrow">→</div>'+
+   '<div class="col"><h3>Who reads it</h3>'+
+    '<div class="box"><b>Paramedic, A&E, GP, pharmacist, physio</b><small>Through CIS2, or break-glass</small></div>'+
+    '<div class="box"><b>CAMHS</b><small>Through CIS2</small></div>'+
+    '<div class="box"><b>Safeguarding lead, SENCO, coach</b><small>Through DfE Sign-in or a voucher</small></div>'+
+    '<div class="box"><b>Support worker, coordinator</b><small>Through a voucher</small></div>'+
+    '<div class="box"><b>Each sees only their slice</b><small>And Sam sees that they looked</small></div>'+
+   '</div>'+
+  '</div></section>'+
+ '<section class="sec"><h2 class="rule">Line by line: where each thing already lives</h2>'+
+  '<div class="table"><table><thead><tr><th>In Thread</th><th>Lives today in</th><th>What Thread does</th></tr></thead><tbody>'+
+  map.map(r=>'<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>').join('')+
+  '</tbody></table></div></section>'+
+ '<section class="sec"><h2 class="rule">Where it lands in policy</h2>'+
+  '<div class="hard">'+
+   '<div><h3>Health: the Single Patient Record</h3><p>The 10 Year Health Plan (3 July 2025) commits to a Single Patient Record, reached through the NHS App and described as a patient passport, within three years. It will be the NHS’s record. Thread is the part the person controls, and the part that reaches outside health to school and support. It reads from the Single Patient Record; it does not compete with it.</p></div>'+
+   '<div><h3>Education: digital Individual Support Plans</h3><p>The SEND white paper <i>Every Child Achieving and Thriving</i> (23 February 2026) proposes a digital Individual Support Plan in a standardised template for every child with Targeted or Specialist support, alongside an EHC plan for the Specialist tier, with assessments under the new system from September 2029. The child’s own words belong in both. Thread is where the child writes them once.</p></div>'+
+   '<div><h3>Standards: About Me</h3><p>The PRSB About Me standard (v2.0.1) is the NHS-endorsed structure for what a person wants professionals to know about them, for adults and children, and it is meant to be implemented alongside shared care records. Thread’s person-authored section is that standard, heading for heading. It is deliberately not for clinician-recorded detail, which stays in the GP record.</p></div>'+
+   '<div><h3>Emergency: the National Record Locator</h3><p>Ambulance services already use the National Record Locator to find mental health crisis plans and end-of-life plans held in other systems. Registering Thread as a record type means a crew can reach the emergency slice from the NHS number when the phone is locked.</p></div>'+
+   '<div><h3>Victims: the Victims’ Code</h3><p>For a child hurt by violence, the Code promises a needs assessment and referral within two working days. Thread is where that assessment can be written once and carried to each service, rather than repeated by each one.</p></div>'+
+  '</div></section>'+
+ '<section class="sec"><h2 class="rule">What Thread is not</h2>'+
+  '<ul><li>Not a new health record. It reads the GP record; it does not copy it.</li>'+
+  '<li>Not a replacement for the ISP, the EHC plan or the shared care record. It carries the child’s words into them.</li>'+
+  '<li>Not a messaging app or a social network. There is nothing to post.</li>'+
+  '<li>Not a decision-maker. It displays; it does not advise, score or predict, which keeps it outside the medical device definition.</li>'+
+  '<li>Not owned by anyone who would profit from the data. A charity or community interest company, or an NHS-hosted service, with the person’s consent governing every disclosure.</li></ul></section>'+
+ '<section class="sec"><h2 class="rule">The hard parts</h2>'+
+  '<div class="hard">'+
+   '<div><h3>Proving who is scanning</h3><p>Solved for NHS staff by Care Identity and for school staff by DfE Sign-in. Youth workers, coaches and support workers have no register, so their organisation vouches for them through GOV.UK One Login. Emergencies take the break-glass route the Summary Care Record already uses: access now, recorded, reported to the person, justified afterwards.</p></div>'+
+   '<div><h3>Who owns it at sixteen</h3><p>Sam is the data subject. From sixteen, young people consent to their own treatment and, in practice, to the sharing of their health information; a parent is a proxy only with their agreement. Under sixteen, the NHS App’s proxy access rules already describe how a parent acts for a child. The record goes with Sam into adulthood rather than expiring with children’s services.</p></div>'+
+   '<div><h3>Clinical safety</h3><p>A clinician who acts on a stale allergy or an old dose can hurt someone. Reading clinical lines live from the GP record removes the second copy. Every other line carries provenance and a review date. A real build is assessed under DCB0129 by the maker and DCB0160 by each organisation that deploys it.</p></div>'+
+   '<div><h3>Law and assurance</h3><p>Health data is special category data under UK GDPR; the lawful basis for a person-held record is explicit consent, withdrawable at any time. Before any pilot: a data protection impact assessment, the Digital Technology Assessment Criteria (DTAC), the Data Security and Protection Toolkit, PRSB conformance for About Me, and WCAG 2.2 AA. None of this is legal advice; a specialist health-data lawyer sees it before real data goes in.</p></div>'+
+   '<div><h3>Trust</h3><p>A paramedic will not scan something they have never heard of. It needs one emergency department and fracture clinic, one school, one CAMHS team and one council SEND team to agree to use it, a visible mark that says what it is, and the professional bodies behind the defaults.</p></div>'+
+  '</div></section>'+
+ '<section class="sec"><h2 class="rule">Why the example is a road accident</h2>'+
+  '<p class="lead">Sam is invented, and so is everything in the record. The example is a cycling accident so that families recovering from other kinds of injury can look at it without reliving anything. The record works the same way whatever brought a child to it: an allergy at eleven, an EHC plan, an accident, an assault. That is the point. It is nobody’s label.</p></section>';
+}
+
+/* ---------- The ask ---------- */
+function renderAsk(){
+ const stakes=[
+  ['PRSB','Thread is an implementation of About Me v2.0.1, heading for heading, in a setting the standard was written for and rarely reaches: children, outside hospital.','A conformance review, and listing as an implementer.'],
+  ['DHSC and NHS England digital, NHS App team','The Single Patient Record will need a layer the person controls and that reaches beyond health. Thread is that layer, built to read from the record rather than copy it.','A route to NHS login integration, a DTAC assessment, and a conversation about the HealthStore.'],
+  ['National Record Locator team','Ambulance crews already find crisis plans this way. A person-held emergency slice is the same pattern.','Thread registered as a record type for a pilot region.'],
+  ['DfE SEND reform team','The digital ISP template needs the child’s own words. About Me is an existing, endorsed structure for exactly that, and it joins the ISP to the health record without a new standard.','An About Me block in the ISP data standard, and one pilot council.'],
+  ['An integrated care board and its Health Innovation Network','A small, bounded pilot with a clear question: did any young person have to tell it twice?','Twelve months, fifty young people, one hospital, one school, one council.'],
+  ['One acute trust: emergency department and fracture clinic','Break-glass works the way the Summary Care Record does. Nothing new to learn.','Agreement to scan, and to log.'],
+  ['One CAMHS team','Told once is trauma-informed practice made structural.','Agreement to read the account rather than ask for it.'],
+  ['One secondary school and one council SEND team','The school plan is shown, not re-typed, and the child’s voice arrives already written.','Agreement to use DfE Sign-in and to export Section A from Thread.'],
+  ['Young people and parents','Nothing about them without them. The defaults for every role are theirs to set.','A paid co-design panel of ten, from the first month.'],
+  ['The ICO','A data protection impact assessment done early, with prior consultation if the residual risk is high.','Advice before, not enforcement after.'],
+  ['Funders: SBRI Healthcare, NIHR i4i, Innovate UK, Nesta, the Health Foundation','A prototype, a paper version in use, a standards map and a pilot site lined up.','Enough to run the twelve months.']
+ ];
+ return '<section class="holder"><p class="eyebrow">The ask</p><h1>Who needs to say yes, and to what</h1>'+
+  '<p class="lead">The ambition is deliberately small. Nothing here asks anyone to build a new system or change a standard. Each ask is for permission to connect to something that already works.</p></section>'+
+ '<section class="sec"><h2 class="rule">Stakeholders</h2><div class="stake">'+
+  stakes.map(s=>'<div class="stk"><div><b>'+esc(s[0])+'</b></div><div><span class="k">What they need to hear</span>'+esc(s[1])+'</div><div><span class="k">What we ask</span>'+esc(s[2])+'</div></div>').join('')+
+ '</div></section>'+
+ '<section class="sec"><h2 class="rule">Twelve months</h2>'+
+  '<ol>'+
+  '<li><b>Months 1 to 2.</b> Paper version in use with ten families. Co-design panel recruited and paid. Data protection impact assessment commissioned. Trademark cleared.</li>'+
+  '<li><b>Months 3 to 5.</b> Thread holds only what Sam writes: About Me, consent by role, the code, the access log. No clinical data yet, so the risk is low and the DPIA is simple. Live with twenty young people.</li>'+
+  '<li><b>Months 6 to 8.</b> NHS login for the holder. Clinical lines read live from the GP record at the pilot practice. Professionals sign in with CIS2. DTAC submitted.</li>'+
+  '<li><b>Months 9 to 11.</b> DfE Sign-in for school staff. Section A exported to the pilot council. Thread registered with the National Record Locator for the pilot ambulance service.</li>'+
+  '<li><b>Month 12.</b> Evaluation on one question, asked of every young person and every professional: did anyone have to tell it twice?</li>'+
+  '</ol></section>'+
+ '<section class="sec"><h2 class="rule">The first three asks</h2>'+
+  '<p class="lead">If only three conversations happen this winter, they are these. The PRSB, for a conformance review, because that turns a prototype into an implementation. One integrated care board’s Health Innovation Network, for a pilot site, because that turns an implementation into evidence. And the DfE SEND reform team, before the ISP data standard is fixed, because a child’s words written once should reach both the health record and the school plan, and that window closes when the template does.</p></section>'+
+ '<section class="sec"><h2 class="rule">Open questions</h2>'+
+  '<ul><li>Who may write to the About Me section besides Sam, and how is a parent’s help shown?</li>'+
+  '<li>What happens when Sam and a parent disagree about who sees what?</li>'+
+  '<li>Should the police ever be a role, for example a family liaison officer after a serious incident?</li>'+
+  '<li>How long does the record live, and who deletes it?</li>'+
+  '<li>If Sam is unconscious and the phone is locked, is the National Record Locator route enough, or does a card in the wallet still matter?</li></ul></section>';
+}
+
+/* ---------- Home: why ---------- */
+function renderHome(){
+ const logo='<svg class="logo" viewBox="0 0 156 40" role="img" aria-label="Thread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" font-weight="700" fill="currentColor">Thread</text><path d="M-4 21 C 18 13, 36 29, 58 21 S 96 13, 114 21 c 8 3, 15 -1, 13 -6 c -2 -5, -10 -3, -7 2 c 3 5, 15 5, 28 1" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ const donate=DONATE_URL
+  ?'<a class="btn thread" href="'+esc(DONATE_URL)+'" target="_blank" rel="noopener">Donate'+(DONATE_PLATFORM?' on '+esc(DONATE_PLATFORM):'')+'</a>'
+  :'<span class="btn thread" aria-disabled="true">Donations open soon</span>';
+ return '<section class="hero">'+logo+
+  '<p class="big">Every new adult asks the same questions. <em>Thread</em> is the record a young person holds, so they only have to tell it once.</p>'+
+  '<p class="lead">When a child is hurt, or needs support, the people who help them arrive one at a time: a paramedic, a doctor, a physio, a teacher, a counsellor, a support worker. Each one needs to know something. Each one asks. The child, or the parent, becomes the only place the whole story lives, and tells it again and again, often at the worst moments to tell it.</p>'+
+  '<p class="lead">Thread turns that round. The young person holds one record. Each professional scans a code and sees only the part they need. Every look is recorded. The hard part, what happened, is written once and shared only with the people the young person chooses.</p>'+
+ '</section>'+
+ '<section class="sec"><h2 class="rule">Three ordinary moments</h2><div class="scenes">'+
+  '<div class="scene"><span class="who">A paramedic, Saturday evening</span><p>A sixteen-year-old is unconscious. The phone is locked. The allergy is in a parent’s memory, and the parent is twenty minutes away. The crew works without it.</p></div>'+
+  '<div class="scene"><span class="who">A new teacher, September</span><p>A child with an EHC plan explains, for the fourth year running, what helps and what does not. The plan is forty pages and sits in an office. The child is the summary.</p></div>'+
+  '<div class="scene"><span class="who">A parent, week six</span><p>Hospital, GP, physio, CAMHS, school, a support service. Six referrals, six forms, the same questions. Nobody holds the thread except the parent, who is also the one trying to hold the child.</p></div>'+
+ '</div></section>'+
+ '<section class="sec"><h2 class="rule">The scale of it</h2>'+
+  '<div class="stats">'+
+   '<div class="stat"><span class="n">638,745</span><span class="d">children and young people in England with an EHC plan, January 2025</span></div>'+
+   '<div class="stat"><span class="n">97,747</span><span class="d">new EHC plans started in 2024 alone</span></div>'+
+   '<div class="stat"><span class="n">0</span><span class="d">of them hold a record that lets them choose who sees what</span></div>'+
+  '</div>'+
+  '<p class="small muted">Source: Department for Education, <a href="https://explore-education-statistics.service.gov.uk/find-statistics/education-health-and-care-plans/2025" target="_blank" rel="noopener">Education, health and care plans, 2025</a>. Every child with a plan, every child with an allergy, and every child recovering from an injury explains themselves to new adults each year. The number who have to is far larger than any one statistic.</p>'+
+ '</section>'+
+ '<section class="sec"><h2 class="rule">Why now</h2>'+
+  '<div class="hard">'+
+   '<div><h3>The pieces exist. Nobody has joined them from the person’s side.</h3><p>The NHS has a standard for what a person wants professionals to know about them (About Me). It has a way to find a record held elsewhere (the National Record Locator). It has sign-ins for its staff; schools have theirs. The GP record holds the allergies and the medicines. What does not exist is the thing that lets the young person point all of that at the right adult, and see who looked.</p></div>'+
+   '<div><h3>Two national records are being redesigned at once.</h3><p>Health is building a Single Patient Record, reached through the NHS App, by 2028. Education is replacing most EHC plans with digital Individual Support Plans from 2029. Both will need the child’s own words. If those words are written once, in a form both can read, the child never has to tell it twice. That window is open now and closes when the templates are fixed.</p></div>'+
+   '<div><h3>The Red Book proved the idea fifty years ago.</h3><p>Every baby in Britain gets a record their parents hold and every professional writes in. It stops at five. Thread picks up at eleven, when a child starts moving through the world without a parent beside them, and it belongs to the child.</p></div>'+
+  '</div></section>'+
+ '<section class="sec"><h2 class="rule">What we hold to</h2>'+
+  '<ul class="principles">'+
+   '<li><span><b>The person holds it.</b> Not the hospital, not the school, not us. From sixteen, the young person alone decides; before that, with a parent.</span></li>'+
+   '<li><span><b>Nothing is copied that already exists.</b> Allergies and medicines are read from the GP record when the code is scanned. There is no second copy to go stale.</span></li>'+
+   '<li><span><b>Every look leaves a trace.</b> The young person can see who read what, and when, including in an emergency.</span></li>'+
+   '<li><span><b>Written once.</b> The account of what happened is written by the young person, in their words, and shared by name only. Everyone else is told they do not need to ask.</span></li>'+
+   '<li><span><b>Nobody’s label.</b> Every child gets one at eleven. For most it holds an allergy, two phone numbers and what helps. It is not a victims’ record or a SEND record. It is a record.</span></li>'+
+   '<li><span><b>Nobody profits from the data.</b> Run as a community interest company or charity, with the person’s consent governing every disclosure.</span></li>'+
+  '</ul></section>'+
+ '<section class="sec"><h2 class="rule">See it working</h2>'+
+  '<p class="lead">Sam is invented, and so is everything in the record. The example is a cycling accident so that anyone can look at it without reliving anything of their own.</p>'+
+  '<div class="cta">'+
+   '<a href="#owner"><b>Sam’s record</b><small>Who sees what, the review dates, the access log</small></a>'+
+   '<a href="#scan"><b>Scan as a professional</b><small>Pick a role, sign in, see your slice</small></a>'+
+   '<a href="#fit"><b>How it fits</b><small>What exists, what Thread adds, line by line</small></a>'+
+   '<a href="#ask"><b>The ask</b><small>Who needs to say yes, and the first year</small></a>'+
+  '</div></section>'+
+ '<section class="card donate"><p class="eyebrow">Help it happen</p>'+
+  '<h2>The first money buys the unglamorous things</h2>'+
+  '<p>A trademark search and filing. A data protection impact assessment by a specialist, before any real record exists. Paying a panel of ten young people to design the defaults for every role, because nothing about them should be decided without them. Paper sheets in ten families’ hands by the new year. None of it is expensive. All of it has to come before anyone in the NHS or a council can say yes.</p>'+
+  '<p class="small muted">Donations go to the community interest company, not to any individual, and the accounts will be published. Until that company is registered, there is nothing to give to, and this button says so.</p>'+
+  '<div class="row">'+donate+'<a class="btn" href="#ask">Read the plan</a></div>'+
+  '<p class="small"><b>If you are a paramedic, an A&E clinician, a GP, a pharmacist, a physio, a safeguarding lead, a SENCO, a CAMHS clinician or a youth worker:</b> the most useful thing you can give is twenty minutes. Look at the Scan view and tell us two things. Would you scan it? What would you need to trust it?'+(CONTACT?' Write to <span class="mono">'+esc(CONTACT)+'</span>.':'')+'</p>'+
+ '</section>'+
+ '<p class="foot">Thread is a working prototype and a proposal. Nothing here is a live service, and no real person’s information is held anywhere in it.</p>';
+}
+
+/* ---------- Routing and events ---------- */
+const main=document.getElementById('main');
+function setNav(v){document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));}
+function render(v){
+ main.innerHTML=v==='scan'?renderScan():v==='fit'?renderFit():v==='ask'?renderAsk():v==='owner'?renderOwner():renderHome();
+ setNav(v);
+ if(v==='owner'&&state.showCode)drawQR();
+ if(v!=='scan')window.scrollTo(0,0);
+}
+function currentView(){const h=(location.hash||'#home').slice(1);return h.indexOf('scan')===0?'scan':h==='fit'?'fit':h==='ask'?'ask':h==='owner'?'owner':'home';}
+function route(){
+ const h=(location.hash||'#home').slice(1);
+ if(h.indexOf('scan')===0){
+  const tok=h.slice(5);
+  if(tok){scan.stale=tok!==state.token;scan.byCode=!scan.stale;
+   if(scan.stale&&!state.log.some(e=>e.stale&&e.tok===tok)){state.log.push({t:now(),role:'paramedic',who:'Old code used',what:'An out-of-date code was scanned. Nothing was shown.',stale:true,tok:tok});save();}
+  }else{scan.stale=false;scan.byCode=false;}
+ }
+ render(currentView());
+}
+function addLog(e){state.log.push(e);save();}
+
+main.addEventListener('click',ev=>{
+ const t=ev.target.closest('button,[data-pick],[data-role]');if(!t)return;
+ const id=t.id;
+ if(t.dataset.role){state.permRole=t.dataset.role;save();render('owner');return;}
+ if(t.dataset.pick){scan.role=t.dataset.pick;scan.step=2;scan.bg=false;scan.preview=false;render('scan');return;}
+ if(id==='toggleCode'){state.showCode=!state.showCode;save();render('owner');return;}
+ if(id==='togglePause'){state.paused=!state.paused;save();render('owner');return;}
+ if(id==='rotate'){state.token=newToken();save();render('owner');return;}
+ if(id==='review'){state.reviewed=true;save();render('owner');return;}
+ if(id==='reset'){state=fresh();save();scan={step:1,role:null,verified:'',until:0,preview:false,bg:false,stale:false,byCode:false,checking:false};render('owner');return;}
+ if(id==='preview'){scan={step:3,role:state.permRole,verified:'Sam looking at the record as this role sees it. Not recorded.',until:Date.now()+30*60000,preview:true,bg:false,stale:false,byCode:false,checking:false};location.hash='#scan';return;}
+ if(id==='back'){scan.step=1;render('scan');return;}
+ if(id==='end'){const wasPreview=scan.preview;scan={step:1,role:null,verified:'',until:0,preview:false,bg:false,stale:false,byCode:false,checking:false};if(wasPreview){location.hash='#owner';}else{render('scan');}return;}
+ if(id==='breakglass'){scan.bg=true;scan.step=3;scan.verified='Emergency access, not signed in. Recorded and reported to Sam.';scan.until=Date.now()+30*60000;state.reviewed=false;addLog({t:now(),role:scan.role,who:'Emergency access, not signed in',what:'Emergency fields only: contacts, allergies, medication, alerts',bg:true});render('scan');return;}
+ if(id==='verify'){
+  const reg=(document.getElementById('reg').value||'').trim()||'unnumbered';
+  const nm=(document.getElementById('nm').value||'').trim()||'Name not given';
+  const r=role(scan.role);const vouched=r.signin.indexOf('voucher')>=0;
+  scan.checking=true;render('scan');
+  setTimeout(()=>{
+   const n=(state.perms[r.id]||[]).length;
+   scan.checking=false;scan.step=3;scan.bg=false;scan.until=Date.now()+30*60000;
+   scan.verified=nm+', '+(vouched?'reference '+reg:r.signin)+' (simulated)';
+   addLog({t:now(),role:r.id,who:nm+', '+(vouched?'ref '+reg:r.signin)+' (simulated)',what:n+' of '+FIELDS.length+' fields'});
+   if(currentView()==='scan')render('scan');
+  },900);
+  return;
+ }
+});
+main.addEventListener('change',ev=>{
+ const sw=ev.target.closest('.sw');if(!sw)return;
+ const list=state.perms[state.permRole]||(state.perms[state.permRole]=[]);
+ const i=list.indexOf(sw.dataset.f);
+ if(sw.checked&&i<0)list.push(sw.dataset.f);
+ if(!sw.checked&&i>=0)list.splice(i,1);
+ save();
+ const lbl=document.getElementById('permcount');if(lbl)lbl.textContent=list.length+' of '+FIELDS.length+' lines';
+});
+window.addEventListener('hashchange',route);
+
+function start(data){
+ if(data&&data.scan)scan=data.scan;
+ route();
+}
+if(window.claude&&window.claude.hot&&window.claude.hot.snapshot){window.claude.hot.snapshot(()=>({scan:scan}));}
+if(window.claude&&window.claude.hot&&window.claude.hot.ready){window.claude.hot.ready(start);}else{start(window.claude&&window.claude.hot?window.claude.hot.data:{});}
+})();
+</script>
+</body>
+</html>
