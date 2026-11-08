@@ -19,6 +19,7 @@ This repository holds a working prototype and a proposal. It is not a live servi
 | **Scan** | The professional's view. Pick a role, sign in with the account you already use (NHS Care Identity, DfE Sign-in, a voucher), see only your slice. A break-glass emergency route that is logged and reported to the holder. |
 | **How it fits** | What already exists, what Thread adds, line by line. Where it lands in policy. What it is not. The hard parts. |
 | **The ask** | Who needs to say yes and to what. A twelve-month pilot path. The first three conversations. |
+| **Brand** (`/brand/`) | The brand pack: wordmark, symbol, colours, type, voice, downloadable files. |
 | **Make** (`/make/`) | A family's own sheet-maker. Fill in the record, choose who gets which lines, print a sheet per person. Nothing leaves the browser. |
 
 ## The design in one paragraph

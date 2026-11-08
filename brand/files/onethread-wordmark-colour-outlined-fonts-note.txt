@@ -1,0 +1,1 @@
+The SVG wordmarks embed the Bricolage Grotesque font so they render identically everywhere. For print suppliers who need outlined text, open the SVG in Illustrator, Affinity or Inkscape and convert text to outlines.

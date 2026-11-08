@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="OneThread brand pack: the wordmark, the thread, colours, type, voice and downloadable logo files.">
+<title>OneThread Brand</title>
+<meta property="og:title" content="OneThread brand pack">
+<meta property="og:image" content="https://onethread.uk/brand/files/onethread-social-card-1200x630.png">
+<link rel="icon" href="files/onethread-symbol-ink-180.png">
+<style>
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url(../fonts/atkinson-hyperlegible-latin-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(../fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url(../fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url(../fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+:root{--bg:#F5F4F0;--surface:#FFFFFF;--fg:#1B2430;--muted:#5C6672;--line:#D9DAD5;--soft:#EBEBE6;--accent:#1F4E8C;--thread:#B9121B;--story-soft:#F4EBDD;--story:#6A4B27;
+ --display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;--body:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme: dark){:root{--bg:#11161C;--surface:#1A2129;--fg:#E8EBEE;--muted:#9AA6B3;--line:#2E3842;--soft:#222B35;--accent:#8CB8F0;--thread:#F0656C;--story-soft:#33281C;--story:#D9B58A}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(30px,6vw,44px);font-weight:700}
+h2{font-size:22px;font-weight:700}
+h2.rule::after{content:"";display:block;width:44px;height:2px;background:var(--thread);margin-top:8px;border-radius:2px}
+h3{font-size:16px;font-weight:700}
+p,ul{margin:0;max-width:66ch}ul{padding-left:20px;display:grid;gap:6px}
+a{color:var(--accent)}
+.top{position:sticky;top:0;z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .in{max-width:860px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{height:34px;width:auto;display:block;color:var(--fg)}
+.top small{display:block;font-size:12px;color:var(--muted);line-height:1.2}
+.top nav{margin-left:auto;display:flex;gap:14px;font-size:14px;flex-wrap:wrap}
+main{max-width:860px;margin:0 auto;padding:26px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px));display:grid;gap:34px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.sec{display:grid;gap:14px}
+.lead{max-width:62ch;font-size:17px}
+.small{font-size:14px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.tile{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);display:grid}
+.tile .show{display:grid;place-items:center;padding:28px 20px;min-height:120px}
+.tile .show img{max-width:100%;height:auto}
+.tile .show.paper{background:#F5F4F0}.tile .show.ink{background:#11161C}.tile .show.red{background:#B9121B}.tile .show.white{background:#fff}
+.tile .cap{padding:10px 14px;border-top:1px solid var(--line);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tile .cap a{font-family:var(--mono);font-size:12px}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.swatch{border-radius:12px;border:1px solid var(--line);overflow:hidden;background:var(--surface)}
+.swatch .c{height:72px}
+.swatch .t{padding:8px 10px;font-size:13px}
+.swatch .t b{display:block}
+.swatch .t code{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.type{display:grid;gap:10px}
+.type .ex{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.type .ex .d{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.1;letter-spacing:-.01em}
+.type .ex .b{font-size:16px;max-width:60ch}
+.type .ex .m{font-family:var(--mono);font-size:14px}
+.type .ex small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.dos{grid-template-columns:1fr}}
+.dos .card h3{color:var(--thread)}
+.dos .card.ok h3{color:#2A7A4A}
+.voice{background:var(--story-soft);color:var(--story);padding:16px 18px;border-radius:12px;font-family:var(--display);font-weight:500;font-size:19px;line-height:1.4;max-width:62ch}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px 8px 0;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td a{font-family:var(--mono);font-size:13px}
+.btn{display:inline-block;font-weight:700;font-size:15px;padding:10px 16px;border-radius:10px;border:1px solid var(--thread);background:var(--thread);color:#fff;text-decoration:none}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+footer .in{max-width:860px;margin:0 auto;padding:14px 16px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a href="../" aria-label="OneThread home" style="display:block;color:inherit"><svg class="logo" viewBox="0 0 214 40" role="img" aria-label="OneThread"><text x="0" y="30" font-family="Bricolage Grotesque, Helvetica Neue, Arial, sans-serif" font-size="32" letter-spacing="-0.5"><tspan font-weight="500" fill="var(--thread)">One</tspan><tspan font-weight="700" fill="currentColor">Thread</tspan></text><path d="M-4 30 C 22 24, 46 36, 72 30 S 122 24, 152 30 S 178 36, 188 31 c 4 -4, 2 -9, -3 -8 c -5 1, -4 7, 1 8 c 6 1, 15 -1, 24 -5" fill="none" stroke="var(--thread)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <small>Tell it once.<br>Brand pack</small>
+  <nav><a href="#mark">Mark</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#voice">Voice</a><a href="#use">Use</a><a href="#files">Files</a></nav>
+</div></header>
+
+<main>
+<section class="sec">
+  <p class="eyebrow">OneThread brand pack · version 1 · November 2026</p>
+  <h1>One name, one red thread, and a promise short enough to say out loud.</h1>
+  <p class="lead">OneThread is a care record held by the young person it is about. The brand has to do three things: be trusted by a paramedic who has never heard of it, feel like it belongs to a sixteen-year-old rather than to a hospital, and never look like an app that wants your data. Everything below follows from that.</p>
+  <p><a class="btn" href="files/onethread-brand-pack.zip">Download everything (zip)</a></p>
+</section>
+
+<section class="sec" id="mark">
+  <h2 class="rule">The mark</h2>
+  <p>The wordmark is the brand. "One" sits in thread red at medium weight; "Thread" in ink at bold. A single red thread runs beneath the baseline, stitched through the word, and ends in a small knot. The thread is the Red Book, the thing that joins the pieces, and the one line a young person holds. It is never decorative: it always runs under the whole word and always ends in the knot.</p>
+  <div class="grid2">
+    <div class="tile"><div class="show paper"><img src="files/onethread-wordmark-colour-1200.png" alt="OneThread wordmark in colour on paper"></div><div class="cap"><span>Primary, on light backgrounds</span><a href="files/onethread-wordmark-colour.svg">svg</a></div></div>
+    <div class="tile"><div class="show ink"><img src="files/onethread-wordmark-colour-on-dark-1200.png" alt="OneThread wordmark in colour on dark"></div><div class="cap"><span>Primary, on dark backgrounds</span><a href="files/onethread-wordmark-colour-on-dark.svg">svg</a></div></div>
+    <div class="tile"><div class="show white"><img src="files/onethread-wordmark-black-1200.png" alt="OneThread wordmark in one colour, black"></div><div class="cap"><span>One colour, for print and stamps</span><a href="files/onethread-wordmark-black.svg">svg</a></div></div>
+    <div class="tile"><div class="show red"><img src="files/onethread-wordmark-white-1200.png" alt="OneThread wordmark in white on red"></div><div class="cap"><span>Reversed, on red or photographs</span><a href="files/onethread-wordmark-white.svg">svg</a></div></div>
+  </div>
+  <h3>The symbol</h3>
+  <p>For app icons, favicons and anywhere the wordmark is too small to read: a bold T with the thread passing through it, on a rounded square. Use the ink version by default; the red version only where an icon needs to stand out on a dark screen.</p>
+  <div class="grid2">
+    <div class="tile"><div class="show paper"><img src="files/onethread-symbol-ink-512.png" alt="OneThread symbol, ink" style="width:120px"></div><div class="cap"><span>Symbol, ink</span><a href="files/onethread-symbol-ink.svg">svg</a></div></div>
+    <div class="tile"><div class="show paper"><img src="files/onethread-symbol-red-1024.png" alt="OneThread symbol, red" style="width:120px"></div><div class="cap"><span>Symbol, red</span><a href="files/onethread-symbol-red.svg">svg</a></div></div>
+  </div>
+  <h3>Clear space and size</h3>
+  <ul>
+    <li>Leave clear space around the wordmark equal to the height of the capital T on every side.</li>
+    <li>Never smaller than 24 mm wide in print or 120 px on screen; below that, use the symbol.</li>
+    <li>Do not recolour, stretch, outline, add a shadow, rotate, or set the words in another typeface. Do not separate the thread from the word except as the thread motif described below.</li>
+  </ul>
+  <h3>The thread motif</h3>
+  <p>The thread on its own (<a href="files/onethread-thread-motif.svg">svg</a>) may be used as a short rule under a heading, as on onethread.uk, and as a divider on paper. It is the only ornament the brand has. One per page is plenty.</p>
+</section>
+
+<section class="sec" id="colour">
+  <h2 class="rule">Colour</h2>
+  <p>A warm paper, a deep ink, and one red. The red is for the thread, the word "One", and the one thing on a page that must be seen. It is never a background for text, and it is never used to mean danger, because the record uses red for out-of-date lines; the brand red and the warning red share a family on purpose, and the context tells them apart.</p>
+  <div class="sw">
+    <div class="swatch"><div class="c" style="background:#B9121B"></div><div class="t"><b>Thread red</b><code>#B9121B</code></div></div>
+    <div class="swatch"><div class="c" style="background:#1B2430"></div><div class="t"><b>Ink</b><code>#1B2430</code></div></div>
+    <div class="swatch"><div class="c" style="background:#F5F4F0;border-bottom:1px solid #D9DAD5"></div><div class="t"><b>Paper</b><code>#F5F4F0</code></div></div>
+    <div class="swatch"><div class="c" style="background:#5C6672"></div><div class="t"><b>Slate (secondary text)</b><code>#5C6672</code></div></div>
+    <div class="swatch"><div class="c" style="background:#1F4E8C"></div><div class="t"><b>Link blue</b><code>#1F4E8C</code></div></div>
+    <div class="swatch"><div class="c" style="background:#F4EBDD"></div><div class="t"><b>Told-once parchment</b><code>#F4EBDD</code></div></div>
+  </div>
+  <p class="small">Dark backgrounds use ink <code style="font-family:var(--mono)">#11161C</code>, text <code style="font-family:var(--mono)">#E8EBEE</code>, and a lifted red <code style="font-family:var(--mono)">#F0656C</code> so the thread stays legible. Status colours on the record (amber for due, red for overdue, green for confirmed) are information, not brand, and are not used in marketing.</p>
+</section>
+
+<section class="sec" id="type">
+  <h2 class="rule">Type</h2>
+  <p>Two typefaces, both free and open, both chosen for reading under stress.</p>
+  <div class="type">
+    <div class="ex"><div class="d">Bricolage Grotesque, for headlines and the mark</div><small>Weights 500 and 700 only. Tight letter-spacing (−1%). Sentence case, never all caps. Headlines are full sentences with full stops.</small></div>
+    <div class="ex"><div class="b">Atkinson Hyperlegible, for everything people have to read. It was designed by the Braille Institute so that letters cannot be mistaken for one another, which is the right instinct for a record a paramedic reads at speed and a sixteen-year-old reads in a corridor.</div><small>Weights 400 and 700. 16 px minimum on screen, 10 pt on paper. Lines no longer than 65 characters.</small></div>
+    <div class="ex"><div class="m">IBM Plex Mono for record references, dates and codes: THREAD-7K2M-QD4A</div><small>Weight 400. Never for running text.</small></div>
+  </div>
+  <p class="small">All three are served from onethread.uk and included in the pack under their own open licences (SIL Open Font License). In Word or Google Docs, Arial and Georgia are acceptable stand-ins; do not substitute a typewriter face for the mono.</p>
+</section>
+
+<section class="sec" id="voice">
+  <h2 class="rule">Voice</h2>
+  <div class="voice">Tell it once.</div>
+  <p>The tagline is the whole proposition and it is always written with the full stop. Everything else follows the same rules.</p>
+  <ul>
+    <li><b>Plain words, short sentences.</b> Write the way a good nurse explains something at a bedside. If a sentence needs a comma to breathe, split it.</li>
+    <li><b>The young person is the subject.</b> "Sam decides who sees what." Not "users can configure permissions." The record is theirs; the professionals are visitors.</li>
+    <li><b>Say what it is not.</b> Not a new health record. Not an app that wants your data. Nobody's label. Stating the negatives is part of the trust.</li>
+    <li><b>Specific, never clever.</b> Numbers, names, dates. No puns on thread, no "weaving", no "tapestry". The metaphor is in the logo and nowhere else.</li>
+    <li><b>Warm, not soft.</b> The subject is children who have been hurt. Dignity over cheer. No exclamation marks.</li>
+    <li><b>Names.</b> OneThread, one word, capital O and T, in text. "Thread" alone is fine once OneThread has been said. Never "One Thread" with a space in running text (the registered word mark is ONE THREAD, which is a legal spelling, not a style).</li>
+  </ul>
+</section>
+
+<section class="sec" id="use">
+  <h2 class="rule">Using it</h2>
+  <div class="dos">
+    <div class="card ok"><h3>Do</h3><ul><li>Put the wordmark on paper or ink with clear space around it.</li><li>Use the thread motif as a single rule under a heading.</li><li>Use the social card and end card as they are for posts and the explainer video.</li><li>Say "built in the open" and link to the source.</li><li>Use the example record (Sam) when showing the product; it is invented and safe to show.</li></ul></div>
+    <div class="card"><h3>Don't</h3><ul><li>Put the mark on photographs of children, hospitals or ambulances.</li><li>Use stock imagery of any kind. If a picture is needed, use the record itself, the paper sheets, or the thread.</li><li>Pair OneThread with the NHS logo or any public body's mark without written permission; the brand sits beside them, never inside them.</li><li>Use the red for buttons that do ordinary things. One red thing per screen.</li><li>Add gradients, shadows, glows or a second accent colour.</li></ul></div>
+  </div>
+  <h3>Video</h3>
+  <p>For the explainer: open on paper, wordmark alone for two seconds, then the line "Every new adult asks the same questions." Close on the end card below, held for four seconds. Captions in Atkinson Hyperlegible, ink on a paper band, never white on video. Music, if any, should be quiet enough to talk over.</p>
+  <div class="grid2">
+    <div class="tile"><div class="show paper"><img src="files/onethread-social-card-1200x630.png" alt="Social sharing card"></div><div class="cap"><span>Social card, 1200 × 630</span><a href="files/onethread-social-card-1200x630.png">png</a></div></div>
+    <div class="tile"><div class="show paper"><img src="files/onethread-video-end-card-1920x1080.png" alt="Video end card"></div><div class="cap"><span>Video end card, 1920 × 1080</span><a href="files/onethread-video-end-card-1920x1080.png">png</a></div></div>
+  </div>
+</section>
+
+<section class="sec" id="files">
+  <h2 class="rule">Files</h2>
+  <p>SVGs embed the typeface so they render identically everywhere; PNGs have transparent backgrounds unless named otherwise. <a class="btn" href="files/onethread-brand-pack.zip">Download everything (zip)</a></p>
+  <table>
+    <thead><tr><th>File</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><a href="files/onethread-wordmark-colour.svg">onethread-wordmark-colour.svg</a> · <a href="files/onethread-wordmark-colour-1200.png">1200 png</a> · <a href="files/onethread-wordmark-colour-600.png">600 png</a></td><td>Primary mark on light backgrounds</td></tr>
+      <tr><td><a href="files/onethread-wordmark-colour-on-dark.svg">onethread-wordmark-colour-on-dark.svg</a> · <a href="files/onethread-wordmark-colour-on-dark-1200.png">png</a></td><td>Primary mark on dark backgrounds</td></tr>
+      <tr><td><a href="files/onethread-wordmark-black.svg">onethread-wordmark-black.svg</a> · <a href="files/onethread-wordmark-black-1200.png">png</a></td><td>One colour, print, fax, stamps</td></tr>
+      <tr><td><a href="files/onethread-wordmark-white.svg">onethread-wordmark-white.svg</a> · <a href="files/onethread-wordmark-white-1200.png">png</a></td><td>Reversed on red or dark photographs</td></tr>
+      <tr><td><a href="files/onethread-symbol-ink.svg">onethread-symbol-ink.svg</a> · <a href="files/onethread-symbol-ink-1024.png">1024</a> · <a href="files/onethread-symbol-ink-512.png">512</a> · <a href="files/onethread-symbol-ink-180.png">180</a></td><td>App icon, favicon, avatar</td></tr>
+      <tr><td><a href="files/onethread-symbol-red.svg">onethread-symbol-red.svg</a> · <a href="files/onethread-symbol-red-1024.png">1024 png</a></td><td>Icon on dark screens</td></tr>
+      <tr><td><a href="files/onethread-thread-motif.svg">onethread-thread-motif.svg</a></td><td>The thread alone, as a rule or divider</td></tr>
+      <tr><td><a href="files/onethread-social-card-1200x630.png">onethread-social-card-1200x630.png</a></td><td>Link previews, LinkedIn, Substack</td></tr>
+      <tr><td><a href="files/onethread-video-end-card-1920x1080.png">onethread-video-end-card-1920x1080.png</a></td><td>End card for the explainer video</td></tr>
+    </tbody>
+  </table>
+  <p class="small">The name OneThread and the mark are held by The Novacene Ltd in stewardship for a public-benefit body (UK trade mark application for ONE THREAD filed November 2026). They may be used to refer to OneThread and to link to it; they are not covered by the site's open licences and may not be used for another product or service. Ask at dataprotection@thenovacene.com for anything else.</p>
+</section>
+</main>
+<footer><div class="in"><span>OneThread. Tell it once.</span><a href="../">Home</a><a href="../privacy/">Privacy and cookies</a><a href="https://github.com/TheNovacene/thread">Source</a></div></footer>
+</body>
+</html>
